@@ -1,4 +1,4 @@
-baseurl      = "https://theautomationdude.github.io/Blog"
+baseurl      = "https://theautomationdude.github.io/blog"
 title        = "My Blog"
 languageCode = "en-us"
 theme        = "hello-friend-ng"
@@ -39,7 +39,7 @@ publishDir = "docs"
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "https://theautomationdude.github.io/Blog"
+      logoText = "https://theautomationdude.github.io/blog"
       logoHomeLink = "/"
     # or
     #
