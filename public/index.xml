@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Adventures in the clouds</title>
+    <link>localhost/</link>
+    <description>Recent content on Adventures in the clouds</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 17 Nov 2021 22:41:00 +0100</lastBuildDate><atom:link href="localhost/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>localhost/about/</link>
+      <pubDate>Fri, 19 Nov 2021 21:09:00 +0100</pubDate>
+      
+      <guid>localhost/about/</guid>
+      <description>Whoami My name is Peter Östman and I&amp;rsquo;m an IT professional with more than 20 years experience. Background in IT Infrastructure, architecture and security. Working with automation, cloud and devops. Living south of Stockholm - Sweden.
+The Blog This blog will be about anything cloud, code, devops and IT in general, depending on what I work with at the moment and what is on my mind. I&amp;rsquo;ll share knowledge on how to do things and my opinions related matters.</description>
+    </item>
+    
+    <item>
+      <title>The beginning (of the blog)</title>
+      <link>localhost/posts/examplepost/</link>
+      <pubDate>Wed, 17 Nov 2021 22:41:00 +0100</pubDate>
+      
+      <guid>localhost/posts/examplepost/</guid>
+      <description>Blog started Subheader Finally I started off this blog, hopefully I will start posting here on a regular basis about the stuff I work with, and stuff I learn at work.
+- Why use Cloud?  Simple Hosting or a way to speed up time to market. Infrastructure investment costs &amp;ldquo;Less staff doing more&amp;rdquo; Flexible costs Fast road to redundancy The costs of building and On-prem &amp;ldquo;cloud&amp;rdquo;.  - Getting started with Azure Powershell - Part 1  Install Powershell 7.</description>
+    </item>
+    
+  </channel>
+</rss>

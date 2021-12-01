@@ -1,0 +1,89 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Posts on Adventures in the clouds</title>
+        <link>localhost/posts/</link>
+        <description>Recent content in Posts on Adventures in the clouds</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Wed, 17 Nov 2021 22:41:00 +0100</lastBuildDate>
+        <atom:link href="localhost/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>The beginning (of the blog)</title>
+            <link>localhost/posts/examplepost/</link>
+            <pubDate>Wed, 17 Nov 2021 22:41:00 +0100</pubDate>
+            
+            <guid>localhost/posts/examplepost/</guid>
+            <description>Blog started Subheader Finally I started off this blog, hopefully I will start posting here on a regular basis about the stuff I work with, and stuff I learn at work.
+- Why use Cloud?  Simple Hosting or a way to speed up time to market. Infrastructure investment costs &amp;ldquo;Less staff doing more&amp;rdquo; Flexible costs Fast road to redundancy The costs of building and On-prem &amp;ldquo;cloud&amp;rdquo;.  - Getting started with Azure Powershell - Part 1  Install Powershell 7.</description>
+            <content type="html"><![CDATA[<h1 id="blog-started">Blog started</h1>
+<h2 id="subheader">Subheader</h2>
+<p>Finally I started off this blog, hopefully I will start posting here on a regular basis about the stuff I work with, and stuff I learn at work.</p>
+<h2 id="--why-use-cloud">- Why use Cloud?</h2>
+<ul>
+<li>Simple Hosting or a way to speed up time to market.</li>
+<li>Infrastructure investment costs</li>
+<li>&ldquo;Less staff doing more&rdquo;</li>
+<li>Flexible costs</li>
+<li>Fast road to redundancy</li>
+<li>The costs of building and On-prem &ldquo;cloud&rdquo;.</li>
+</ul>
+<h2 id="--getting-started-with-azure-powershell---part-1">- Getting started with Azure Powershell - Part 1</h2>
+<ul>
+<li>Install Powershell 7.2</li>
+<li>Install VSCode</li>
+<li>Install Extensions (Powershell, Bicep, Arm, Config brackets etc.)</li>
+<li>Install Powershell AZ module</li>
+<li>Connect to Azure, test Get-AzSubscription</li>
+<li>Install Git</li>
+<li>Cloning a repo</li>
+</ul>
+<h2 id="getting-started-with-azure-powershell---part-2">Getting started with Azure Powershell - Part 2</h2>
+<ul>
+<li>Configuring the Windows Terminal</li>
+<li>OhMyPosh</li>
+<li>Link to Git introduction</li>
+<li>Create and clone your first repo</li>
+<li>Install Bicep</li>
+</ul>
+<h2 id="--azure-policy">- Azure Policy</h2>
+<ol>
+<li>Introduction to Azure Policy</li>
+</ol>
+<ul>
+<li>When to use policy, security and compliance versus developer freedom. The purpose of the cloud.</li>
+<li>authoring and deployment method to use (arm, bicep, policy etc.).</li>
+<li>Policy def. policy assign, scoping
+0- Policy Structure</li>
+</ul>
+<ol start="2">
+<li>Custom policy</li>
+</ol>
+<ul>
+<li>Audit policy</li>
+<li>Deny Policy</li>
+<li>Disabled policy</li>
+<li>Triggering policy evaluation API (REST, Powerhshell? Cli?)</li>
+</ul>
+<ol start="3">
+<li>Remediation policy - part 1</li>
+</ol>
+<ul>
+<li>Append Policy</li>
+<li>Modify Policy</li>
+</ul>
+<ol start="4">
+<li>Remediation policy - part 2</li>
+</ol>
+<ul>
+<li>AuditIfNotExists Policy</li>
+<li>DeployIfNotExists Policy</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">Get-Command
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd ..
+</code></pre></div>]]></content>
+        </item>
+        
+    </channel>
+</rss>
