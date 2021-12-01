@@ -1,4 +1,4 @@
-baseurl      = "https://theautomationdude.github.io"
+baseurl      = "https://theautomationdude.github.io/blog"
 title        = "My Blog"
 languageCode = "en-us"
 theme        = "hello-friend-ng"
@@ -39,7 +39,7 @@ publishDir = "docs"
     readOtherPosts = "Read other posts"
 
     [languages.en.params.logo]
-      logoText = "https://theautomationdude.github.io"
+      logoText = "https://theautomationdude.github.io/blog"
       logoHomeLink = "/"
     # or
     #
@@ -50,8 +50,8 @@ publishDir = "docs"
   [[menu.main]]
     identifier = "blog"
     name       = "Blog"
-    url        = "/posts"
+    url        = "./posts"
   [[menu.main]]
     identifier = "about"
     name       = "About"
-    url        = "/about"
+    url        = "./about"
