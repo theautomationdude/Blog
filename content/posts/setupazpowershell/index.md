@@ -30,7 +30,7 @@ images:
 
  You should get something like this:
 
-![Module found!](/images/SetupAzPowershell.jpg)
+![Module found!](./SetupAzPowershell.jpg)
 
 Now you know that the correct module was found in the PSGallery.
 
@@ -46,12 +46,24 @@ Powershell will tell you that the repository is untrusted since psgallery is not
 
 The installation will take a while and when it's done it should look like this, with no errors.
 
-![Az Module Installed!](/images/AzModuleInstalled.jpg)
+![Az Module Installed!](./AzModuleInstalled.jpg)
 
 Now you can connect to Azure:
 
 `Connect-AzAccount`
 
 A web browser will open and you will be asked to authenticate to Azure.
+
+Once you are authenticated you can start exploring the Powershell commands in the Az module.
+
+To list the commands of a module (in this example the Az.Resources module) you can type:
+
+`get-command -Module Az.Resources | more`
+
+Please note that the Az module is a compilation of many modules, that's why this example just takes the commands in the Az.Resources module.
+
+**Happy Powershelling and stay tuned for the next blogpost!**
+
+/TheAutomationDude
 
 
