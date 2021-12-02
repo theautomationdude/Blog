@@ -7,7 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 22 Nov 2021 12:22:08 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 17:22:08 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How setup Powershell for Azure</title>
+      <link>https://theautomationdude.github.io/blog/posts/setupazpowershell/</link>
+      <pubDate>Thu, 02 Dec 2021 17:22:08 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/setupazpowershell/</guid>
+      <description>If you are using the Azure Cloud shell, you already have a useful powershell environment setup for you there by Microsoft&amp;hellip;
+But it&amp;rsquo;s not that unusual that employers want to keep all your code in a repo that is company controlled and where your teammates can access your files, and that repo may not always be directly accessible from the cloud shell.
+For that purpose, you might want to setup your own Powershell environment on the computer you work from.</description>
+    </item>
+    
     <item>
       <title>About</title>
       <link>https://theautomationdude.github.io/blog/about/</link>

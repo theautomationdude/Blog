@@ -6,7 +6,7 @@ date: 2021-11-22T12:22:08+01:00
 
 draft: false 
 
-comments: false 
+comments: true 
 
 images: 
 

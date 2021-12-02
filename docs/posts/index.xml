@@ -6,8 +6,42 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Mon, 22 Nov 2021 12:22:08 +0100</lastBuildDate>
+        <lastBuildDate>Thu, 02 Dec 2021 17:22:08 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>How setup Powershell for Azure</title>
+            <link>https://theautomationdude.github.io/blog/posts/setupazpowershell/</link>
+            <pubDate>Thu, 02 Dec 2021 17:22:08 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/setupazpowershell/</guid>
+            <description>If you are using the Azure Cloud shell, you already have a useful powershell environment setup for you there by Microsoft&amp;hellip;
+But it&amp;rsquo;s not that unusual that employers want to keep all your code in a repo that is company controlled and where your teammates can access your files, and that repo may not always be directly accessible from the cloud shell.
+For that purpose, you might want to setup your own Powershell environment on the computer you work from.</description>
+            <content type="html"><![CDATA[<p>If you are using the Azure Cloud shell, you already have a useful powershell environment setup for you there by Microsoft&hellip;</p>
+<p>But it&rsquo;s not that unusual that employers want to keep all your code in a repo that is company controlled and where your teammates can access your files, and that repo may not always be directly accessible from the cloud shell.</p>
+<p>For that purpose, you might want to setup your own Powershell environment on the computer you work from. I&rsquo;ll go through this step by step in a series of tiny blog posts.</p>
+<h2 id="installing-powershell-7">Installing Powershell 7</h2>
+<p>Getting and installing the package is a bit different depending on Operating system, but Microsoft have you covered for many of the flavours. Just choose your flavour in this <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.2">link</a> and follow the instructions.</p>
+<h2 id="getting-the-az-powershell-module">Getting the Az Powershell module</h2>
+<p>Installing a Powershell module is easy and can be done in more than one way. I suggest you try a multi step approach if you are new to powershell and not too sure of what you are doing.</p>
+<p>Open up Powershell and type:</p>
+<p><code>Find-Module -Name Az</code></p>
+<p>You should get something like this:</p>
+<p><img src="/images/SetupAzPowershell.jpg" alt="Module found!"></p>
+<p>Now you know that the correct module was found in the PSGallery.</p>
+<p>Now go ahead and install the module, since we know that the Find-Module command returned the exact module that we wanted, we can take the output from Find-Module and send it through the pipeline (|) to the Install-Module command. We&rsquo;ll add the -Scope parameter and set the scope to CurrentUser, that way we avoid any need to elevate our privileges to install the module.</p>
+<p><code>Find-Module -Name Az | Install-Module -Scope CurrentUser</code></p>
+<p>Sometimes there are commands that conflict, then you might need to add the -AllowClobber and -Force parameters</p>
+<p><code>Find-Module -Name Az | Install-Module -Scope CurrentUser -AllowClobber -Force</code></p>
+<p>Powershell will tell you that the repository is untrusted since psgallery is not configured to be trusted (and they are damn right, don&rsquo;t trust everything in there!). Powershell asks you to confirm that you want to continue with installation of the module, press &ldquo;a&rdquo; to go on.</p>
+<p>The installation will take a while and when it&rsquo;s done it should look like this, with no errors.</p>
+<p><img src="/images/AzModuleInstalled.jpg" alt="Az Module Installed!"></p>
+<p>Now you can connect to Azure:</p>
+<p><code>Connect-AzAccount</code></p>
+<p>A web browser will open and you will be asked to authenticate to Azure.</p>
+]]></content>
+        </item>
         
         <item>
             <title>What are the reasons for cloud adoption?</title>
