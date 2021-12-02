@@ -40,7 +40,7 @@ publishDir = "docs"
 
     [languages.en.params.logo]
       logoText = "https://theautomationdude.github.io/blog"
-      logoHomeLink = "/"
+      logoHomeLink = "./"
     # or
     #
     # path = "/img/your-example-logo.svg"
