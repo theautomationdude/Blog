@@ -6,8 +6,63 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Thu, 02 Dec 2021 17:22:08 +0100</lastBuildDate>
+        <lastBuildDate>Tue, 07 Dec 2021 17:44:31 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Install Git version control on a Windows PC</title>
+            <link>https://theautomationdude.github.io/blog/posts/installgit/</link>
+            <pubDate>Tue, 07 Dec 2021 17:44:31 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/installgit/</guid>
+            <description>Whether you are developing applications, scripts or authoring Infrastructure As Code such as ARM, Bicep, Cloudformation, Google Cloud Deployment Manager or Terraform -templates, version control is important and at the heart of the DevOps toolkit. The most popular and widely adopted version control tool is Git, developed by Linus Torvalds – the inventor of the Linux kernel.
+If you work in VSCode, you won&amp;rsquo;t need to learn the git-cli commands, since VSCode has built-in support for git.</description>
+            <content type="html"><![CDATA[<p>Whether you are developing applications, scripts or authoring Infrastructure As Code such as ARM, Bicep, Cloudformation, Google Cloud Deployment Manager or Terraform  -templates, version control is important and at the heart of the DevOps toolkit. The most popular and widely adopted version control tool is Git, developed by Linus Torvalds – the inventor of the Linux kernel.</p>
+<p>If you work in VSCode, you won&rsquo;t need to learn the git-cli commands, since VSCode has built-in support for git.</p>
+<h2 id="here-is-a-simple-guide-to-installing-git-on-a-windows-operating-system">Here is a simple guide to installing git on a Windows operating system.</h2>
+<p>Download the git installer from <a href="https://git-scm.com/downloads">https://git-scm.com/downloads</a> and start the installation.</p>
+<p>In the first Screen there is a some information about the GNU public license, just click &lsquo;Next&rsquo; (or read through it if you wish).</p>
+<h3 id="git-components-to-install">Git components to install</h3>
+<p><img src="./components.jpg" alt="Components selection"></p>
+<p>I ususally just accept the default components and click &lsquo;Next&rsquo;.</p>
+<h3 id="text-editor-for-git">Text editor for git</h3>
+<p><img src="./editor.jpg" alt="Editor Selection"></p>
+<p>This sets what text editor git will use when you need to resolve things like merge conflicts. I prefer to use the nano editor for git, vim is a steep learning curve if you are not used to it. Since I use the VSCode support, this setting doesn&rsquo;t have much effect.</p>
+<h3 id="default-initial-branch">Default initial branch</h3>
+<p><img src="./defaultbranch.jpg" alt="Default initial branch"></p>
+<p>Let Git decide the name of the intial branch in newly created repos (master is default for now, but both master and main are commonly used)</p>
+<h3 id="path-variable-modifications">PATH Variable modifications</h3>
+<p><img src="./path.jpg" alt="Path"></p>
+<p>Now you get the question how you want to use git (what modifications git will do to your PATH variable), you should use the recommended setting since you want to be able to use git in your powershell session and VSCode.</p>
+<h3 id="ssh-client">SSH Client</h3>
+<p><img src="./ssh.jpg" alt="SSH"></p>
+<p>Next choice is the secure shell (ssh) client to use, unless you have another installed I suggest you use the OpenSSH client bundled with git.</p>
+<h3 id="ssltls">SSL/TLS</h3>
+<p><img src="./ssl.jpg" alt="SSL/TLS"></p>
+<p>Now you can choose what ssl/tls library to use for webrequests. If you want to make use of the the internal company CA certificates and trusted roots I suggest you use the native windows certificate store.</p>
+<h3 id="line-endings">Line endings</h3>
+<p><img src="./lineendings.jpg" alt="Line endings"></p>
+<p>If you didn&rsquo;t already know, different operating systems use different control characters to end a line, this actually goes back to the era of the mechanical typewriter, Scott Hanselman explains it very well in this <a href="https://www.youtube.com/watch?v=TtiBhktB4Qg">Video</a>.</p>
+<p>In short Windows uses CR (Carriage Return)) + LF (Line Feed) while the Linux and Unix family uses only LF and some Apple operating systems use only CR. What a complex world we live in!</p>
+<p>Now git will help you with converting new lines to be compatible with other operating systems. Use the recommended setting to have your code being committed to the repository with the LF, and checked out with CR+LF. This will be seamless to you, everything will be just as usual while you work on your Windows operating system, it&rsquo;s like magic!</p>
+<h3 id="terminal-emulator">Terminal emulator</h3>
+<p><img src="./terminal.jpg" alt="Terminal"></p>
+<p>Since I don&rsquo;t use git bash, this makes no real difference to me, so I use the default MinTTY.</p>
+<h3 id="git-pull-behaviour">Git pull behaviour</h3>
+<p><img src="./pullbehaviour.jpg" alt="Git Pull behaviour"></p>
+<p>To understand this setting you need to dive into the strategies that git has for pulling and merging changes between branches. The default setting is to Fast-Forward or Merge and you can safely use that setting.</p>
+<h3 id="credential-manager">Credential manager</h3>
+<p><img src="./credentialhelper.jpg" alt="Credential manager"></p>
+<p>I haven&rsquo;t used the git credential manager so far, but I let git install it anyway.</p>
+<h3 id="extra-options">Extra options</h3>
+<p><img src="./extraoptions.jpg" alt="Extra Options"></p>
+<h3 id="experimental-options">Experimental options</h3>
+<p><img src="./experimentaloptions.jpg" alt="Experimental options"></p>
+<p>Now you can click install and get on with your life!</p>
+<p><strong>Next is setting up VSCode and cloning your first repository, stay tuned for the next blogpost!</strong></p>
+<p>/TheAutomationDude</p>
+]]></content>
+        </item>
         
         <item>
             <title>How setup Powershell for Azure</title>

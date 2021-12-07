@@ -7,34 +7,36 @@ images:
 tags:
   - untagged
 ---
-# Blog started
-## Subheader
-Finally I started off this blog, hopefully I will start posting here on a regular basis about the stuff I work with, and stuff I learn at work.
-
-## - Why use Cloud? 
-- Simple Hosting or a way to speed up time to market.
-- Infrastructure investment costs
-- "Less staff doing more"
-- Flexible costs
-- Fast road to redundancy
-- The costs of building and On-prem "cloud".
 
 ## - Getting started with Azure Powershell - Part 1
 - Install Powershell 7.2
+- Install Powershell AZ module
+# VSCode + Git
 - Install VSCode
 - Install Extensions (Powershell, Bicep, Arm, Config brackets etc.)
-- Install Powershell AZ module
-- Connect to Azure, test Get-AzSubscription
-- Install Git
-- Cloning a repo
+
+- Install Git: https://git-scm.com/downloads
+- - First Screen GNU public license, next
+- - Accept default options or change as you want
+- - Use nano editor by default (If you use VSCode you might not use Git Cli)
+- - Let Git decide the name of the intial branch in newly created repos (master is default for now)
+- - See images
+
+- Create and clone your first repo
+- Link to Git introduction
+# The power of Powershell
+- What is so good about Powershell so good? 
+- Example with Role Definition, adding permissions with the "add" method instead of editing the json. 
+- More examples...
 
 ## Getting started with Azure Powershell - Part 2
-- Configuring the Windows Terminal
-- OhMyPosh
-- Link to Git introduction
-- Create and clone your first repo
 - Install Bicep
+- Pictures of my complete setup, Powershell, git, VSCode, extensions, repo, windows terminal. 
+- OhMyPosh
+- Configuring the Windows Terminal
+- Connect to Azure, test Get-AzSubscription
 
+# Azure Bastion (SSH/RDP)
 
 ## - Azure Policy
 1. Introduction to Azure Policy 
