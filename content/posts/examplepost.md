@@ -11,17 +11,10 @@ tags:
 ## - Getting started with Azure Powershell - Part 1
 - Install Powershell 7.2
 - Install Powershell AZ module
-# VSCode + Git
+# VSCode
 - Install VSCode
 - Install Extensions (Powershell, Bicep, Arm, Config brackets etc.)
-
-- Install Git: https://git-scm.com/downloads
-- - First Screen GNU public license, next
-- - Accept default options or change as you want
-- - Use nano editor by default (If you use VSCode you might not use Git Cli)
-- - Let Git decide the name of the intial branch in newly created repos (master is default for now)
-- - See images
-
+# Git
 - Create and clone your first repo
 - Link to Git introduction
 # The power of Powershell

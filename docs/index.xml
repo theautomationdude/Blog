@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 07 Dec 2021 17:44:31 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 09:48:44 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting up and ready with VSCode</title>
+      <link>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</link>
+      <pubDate>Sun, 12 Dec 2021 09:48:44 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</guid>
+      <description>When you are authoring or editing any type of code or markdown text, VSCode can be a powerfull ally. It will give you syntaxt highlighting and intellisense for most modern programming languages and there is a wide set of extensions to make your life easier. If that wasn&amp;rsquo;t enough, VSCode also has built-in support for Git, meaning that you don&amp;rsquo;t need to learn all the Git commandline syntax and you get a visualization of your branches, commits, staged changes and stash.</description>
+    </item>
+    
     <item>
       <title>Install Git version control on a Windows PC</title>
       <link>https://theautomationdude.github.io/blog/posts/installgit/</link>

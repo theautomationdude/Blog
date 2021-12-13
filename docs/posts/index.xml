@@ -6,8 +6,41 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Tue, 07 Dec 2021 17:44:31 +0100</lastBuildDate>
+        <lastBuildDate>Sun, 12 Dec 2021 09:48:44 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Getting up and ready with VSCode</title>
+            <link>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</link>
+            <pubDate>Sun, 12 Dec 2021 09:48:44 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</guid>
+            <description>When you are authoring or editing any type of code or markdown text, VSCode can be a powerfull ally. It will give you syntaxt highlighting and intellisense for most modern programming languages and there is a wide set of extensions to make your life easier. If that wasn&amp;rsquo;t enough, VSCode also has built-in support for Git, meaning that you don&amp;rsquo;t need to learn all the Git commandline syntax and you get a visualization of your branches, commits, staged changes and stash.</description>
+            <content type="html"><![CDATA[<p>When you are authoring or editing any type of code or markdown text, VSCode can be a powerfull ally. It will give you syntaxt highlighting and intellisense for most modern programming languages and there is a wide set of extensions to make your life easier. If that wasn&rsquo;t enough, VSCode also has built-in support for Git, meaning that you don&rsquo;t need to learn all the Git commandline syntax and you get a visualization of your branches, commits, staged changes and stash. It also has a debugger to help you debug your code.</p>
+<p>VSCode is open-source, developed and maintained by Microsoft with support from a vibrant community. The fact that it&rsquo;s free with no need for a license and at the same time very powerful has made it a immensely popular code editor. It&rsquo;s also the editor provided in Github Codespaces and also available in the Azure Cloud Shell.</p>
+<h2 id="installation">Installation</h2>
+<p>You can download VSCode from <a href="https://code.visualstudio.com/">https://code.visualstudio.com</a> and the installation can be done <strong>without</strong> any administrator equivalent privileges.</p>
+<h2 id="first-some-useful-settings">First some useful settings</h2>
+<p>To open settings first bring up the VSCode command mode by pressing Ctrl+Shift+P, the write <em>Settings</em> and select <em>&ldquo;Preferences: Open Settings UI&rdquo;</em> from the list.
+<img src="./settings.jpg" alt="Settings"></p>
+<p>Go down to the <em>Text Editor</em> menu item, Now find the setting <em>Bracket Pair Colorization:</em> <strong>Enabled</strong> and tick the box.
+Next go down to <em>Guides: Bracket Pairs</em> - Set it to True
+This will give all your bracket pairs different colors and also show a guide that visualises the level you are on in your code.
+<img src="./brackets.jpg" alt="Bracket Settings"></p>
+<h2 id="extensions">Extensions</h2>
+<p>There are tons of useful extensions for VSCode, and I use more than I write in this list depending on what kind of project I&rsquo;m working on. Too many extensions may slow VSCode down and sometimes the effects are not very good, try to keep it civil&hellip; For my series of blogposts I&rsquo;ll recommend as a minimum to have at least:</p>
+<ul>
+<li><strong>Powershell</strong> Your essentials for the Powershell language, Debugger, Intellisense, Syntax highlighting, integrated console and more.</li>
+<li><strong>Bicep</strong> A must have when authoring Azure Bicep templates, provides Intellisence, Syntax Highlighting and more.</li>
+<li><strong>Path Intellisense</strong> VSCode helps you with autocompleting paths in your code, as long as the path is relative in your local filesystem.</li>
+<li><strong>GitLens</strong> Visualises Git for you, totally recommend it for anyone that isn&rsquo;t well versed with the Git cli.</li>
+<li>Bracket Pair Colorizer is really nice, but you don&rsquo;t really need it if you have done the bracket settings I&rsquo;ve shown. I don&rsquo;t use it anymore.</li>
+</ul>
+<p>Now you should have VSCode ready for your first steps with Powershell and Azure.</p>
+<p><strong>Next we&rsquo;ll do some Git basics in VSCode! Happy Coding!</strong></p>
+<p>/TheAutomationDude</p>
+]]></content>
+        </item>
         
         <item>
             <title>Install Git version control on a Windows PC</title>
