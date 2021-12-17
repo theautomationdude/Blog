@@ -14,9 +14,13 @@ tags:
 # VSCode
 - Install VSCode
 - Install Extensions (Powershell, Bicep, Arm, Config brackets etc.)
+
 # Git
 - Create and clone your first repo
 - Link to Git introduction
+# VSCode 2
+VSCode keyboard shortcuts
+https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
 # The power of Powershell
 - What is so good about Powershell so good? 
 - Example with Role Definition, adding permissions with the "add" method instead of editing the json. 
