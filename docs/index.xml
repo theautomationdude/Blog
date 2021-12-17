@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sun, 12 Dec 2021 09:48:44 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Dec 2021 21:48:27 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Git version control in VSCode</title>
+      <link>https://theautomationdude.github.io/blog/posts/gitinvscode/</link>
+      <pubDate>Thu, 16 Dec 2021 21:48:27 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/gitinvscode/</guid>
+      <description>In a previous post I wrote about how to install git on the windows operating system. And another post was about how to get up and running with VSCode. This post will cover some basics on how to work with git, especially in VSCode.
+To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch.</description>
+    </item>
+    
     <item>
       <title>Getting up and ready with VSCode</title>
       <link>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</link>

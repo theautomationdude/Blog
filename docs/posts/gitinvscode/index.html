@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="In a previous post I wrote about how to install git on the windows operating system. And another post was about how to get up and running with VSCode. This post will cover some basics on how to work with git, especially in VSCode.
+To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch." />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BYK6B4BVVJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BYK6B4BVVJ');
+</script>
+<link rel="canonical" href="https://theautomationdude.github.io/blog/posts/gitinvscode/" />
+
+
+    <title>
+        
+            Using Git version control in VSCode :: theAutomationDude  — A blog about cloud and devops
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/blog/main.17863a81d979b637a02cd7632a4d86e9d80563ef460fd6af1a56962efcaa066b.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+    <link rel="manifest" href="/blog/site.webmanifest">
+    <link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/blog/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="Using Git version control in VSCode">
+<meta itemprop="description" content="In a previous post I wrote about how to install git on the windows operating system. And another post was about how to get up and running with VSCode. This post will cover some basics on how to work with git, especially in VSCode.
+To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch."><meta itemprop="datePublished" content="2021-12-16T21:48:27+01:00" />
+<meta itemprop="dateModified" content="2021-12-16T21:48:27+01:00" />
+<meta itemprop="wordCount" content="1445"><meta itemprop="image" content="https://theautomationdude.github.io/blog"/>
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://theautomationdude.github.io/blog"/>
+
+<meta name="twitter:title" content="Using Git version control in VSCode"/>
+<meta name="twitter:description" content="In a previous post I wrote about how to install git on the windows operating system. And another post was about how to get up and running with VSCode. This post will cover some basics on how to work with git, especially in VSCode.
+To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch."/>
+
+
+
+
+    <meta property="og:title" content="Using Git version control in VSCode" />
+<meta property="og:description" content="In a previous post I wrote about how to install git on the windows operating system. And another post was about how to get up and running with VSCode. This post will cover some basics on how to work with git, especially in VSCode.
+To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://theautomationdude.github.io/blog/posts/gitinvscode/" /><meta property="og:image" content="https://theautomationdude.github.io/blog"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-16T21:48:27+01:00" />
+<meta property="article:modified_time" content="2021-12-16T21:48:27+01:00" /><meta property="og:site_name" content="theAutomationDude" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2021-12-16 21:48:27 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://theautomationdude.github.io/blog" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">https://theautomationdude.github.io/blog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/blog/about">About</a></li><li><a href="/blog/posts">Blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        7 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://theautomationdude.github.io/blog/posts/gitinvscode/">Using Git version control in VSCode</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p>In a previous post I wrote about how to <a href="/blog/posts/installgit/">install git on the windows operating system</a>. And another post was about how to <a href="/blog/posts/gettingupandreadywithvscode/">get up and running with VSCode</a>. This post will cover some basics on how to work with git, especially in VSCode.</p>
+<p>To contribute to a software project, you can clone a repository and then push new code that you have authored to it. Normally this is done by working in different branches, where the main or master branch normally contains the version of the code that will be pushed to the production environment, while all developers work in other branches that get merged into the master/main branch. This way development can be version controlled and be tested without being introduced to the master branch before it&rsquo;s ready.</p>
+<h2 id="git-config">Git config</h2>
+<p>To collaborate with others in Git you must first set some user settings. Open a shell (powershell, vscode integrated shell or the command shell), then type.</p>
+<p><code>git config --global user.name &quot;My Name&quot;</code></p>
+<p>(use your own name of course)</p>
+<p><code>git config --global user.email &quot;my.email@domain.com&quot;</code></p>
+<p>(use your own email of course)</p>
+<h2 id="getting-the-repository-clone-url">Getting the repository clone URL</h2>
+<p>Go to the repository you want to clone, in this tutorial I&rsquo;ll use Github, but it&rsquo;s pretty much the same in Azure DevOps and Gitlab (and probably all the other flavours of version control repository management services out there).</p>
+<p>In the repository you click the code/clone button, this will copy the clone URL that you will use in Git cli or VSCode.</p>
+<p><img src="./clone.jpg" alt="CloneURL"></p>
+<h3 id="now-you-can-either-clone-the-repository-by-using-git-command-line-interface-cli-or-by-using-the-vscode-graphical-user-interface-gui">Now you can either clone the repository by using Git command line interface (cli), or by using the VSCode graphical user interface (GUI).</h3>
+<h2 id="clone-an-existing-repository-with-vscode">Clone an existing repository with VSCode</h2>
+<p>In VSCode, you press <em>Ctrl+Shift+P</em> to open up the VSCode command palette.</p>
+<p><img src="./gitclone.jpg" alt="VSCode Clone"></p>
+<p>Now type Git: Clone and then VSCode will ask you for the cloning url that you copied from the repository clone button.</p>
+<p><img src="./cloneurlvscode.jpg" alt="VSCode CloneURL"></p>
+<p>Paste the url in the box and then select the folder where you want to store your local replica of the repository, the repository will unpacked into a subfolder to this folder that has the same name as the repository. VSCode will ask if you want to add this repository to the current workspace or open it in a new window, personally I prefer using one window per repository that I&rsquo;m working with.</p>
+<h2 id="clone-an-existing-repository-with-git-cli">Clone an existing repository with Git cli</h2>
+<p>Use whatever command (or alias) that rocks your boat to set the folder where you want the repository to be cloned into as your current working directory. In this example we will clone to the <em>ClonedRepos</em> folder in the user home folder.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cd ~<span style="color:#ae81ff">\C</span>lonedRepos
+</code></pre></div><p>or</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">Set-Location ~\ClonedRepos
+</code></pre></div><p>(useful aliases for Set-Location are sl or cd)</p>
+<h4 id="now-clone-the-repo-with-the-git-clone-command-and-pasting-in-the-repository-clone-url">Now clone the repo with the git clone command and pasting in the repository clone url.</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone &lt;your cloneurl pasted here&gt;
+</code></pre></div><h2 id="using-vscode">Using VSCode</h2>
+<p>Most Git commands can be issued by using the GUI in VSCode source control. It&rsquo;s working well and you won&rsquo;t need to learn the Git syntax or commands, you can just focus on the concepts like branches, commits, stash, push, pull, merge etc. that Git has. I recommend anyone new to Git to go down the VSCode GUI route, just to get used to working with it and you can learn the Git cli later if needed. I don&rsquo;t use the git cli much at all, don&rsquo;t see much need for it. Here&rsquo;s some pictures showing the different buttons for the features that are described with git cli commands below.</p>
+<p><img src="vscodesourcecontrol.jpg" alt="VSCode source control"></p>
+<p>By clicking the &lsquo;+&rsquo; symbol a change is added to the staging area. If you hoover over the change in the staging area a &lsquo;-&rsquo; symbol will show, clicking this moves the change back from staging to tracked changes. To add all changes you can select the + in the folder structure of the source control, or just make an empty commit, then VSCode will ask if you want to apply all changes in this commit.</p>
+<p>By right clicking changes you get some additional options that don&rsquo;t have buttons. Also note that you can discard changes, that means that the changes are removed from the file(s), if you then save the file, the changes are lost forever&hellip;</p>
+<p><img src="stash.jpg" alt="Stash"></p>
+<p>By clicking the three dots &lsquo;&hellip;&rsquo; in the top of the repo control you get another menu with options such as creating and managing branches.</p>
+<p><img src="branch.png" alt="Branch"></p>
+<p>In the bottom you have expandable sections where you can view and manage your commits, branches, remotes, file history and stashes. For example you can switch branch, delete branches, apply stash and more. Some of these functions are also available in the main source control section at the top.</p>
+<p><img src="switchbranch.png" alt="VSCode source control"></p>
+<h2 id="branches">Branches</h2>
+<p>By default you are working in the main or master branch. But best practise is to work with changes related to a feature or fix in a separate branch.</p>
+<h5 id="create-two-new-branches-called-feature1--feature2">Create two new branches called feature1 &amp; feature2</h5>
+<p><code>git branch feature1</code></p>
+<p><code>git branch feature2</code></p>
+<h5 id="switch-to-branch-feature1">Switch to branch feature1</h5>
+<p><code>git switch feature1</code></p>
+<h5 id="show-branches-your-current-is-in-green-with-an-asterisk--in-front">Show branches (your current is in green with an asterisk (*) in front)</h5>
+<p><code>git branch</code></p>
+<h5 id="remove-branch-feature2">Remove branch feature2</h5>
+<p><code>git branch --delete feature2</code></p>
+<h2 id="stage-changes-for-commit">Stage changes for commit</h2>
+<p>When you have edited and saved a file and want to add it to a commit you add it to the staging area.</p>
+<h5 id="use-the-git-add-command">Use the git add command.</h5>
+<p><code>git add mymarkdowncode.md</code></p>
+<p>Just remember that you must specify the path to the file if it&rsquo;s not in the present working directory that you are in.</p>
+<p><code>git add ./notes/mymarkdowncode.md</code></p>
+<p>You can also add all files in a directory at once.</p>
+<p><code>git add .</code></p>
+<p><code>git add ./notes/.</code></p>
+<p>Just remember that Git only adds changed files to the commit, this also includes changes to the path of the files (and folders if you have a .gitkeep file in the folder).</p>
+<h2 id="remove-changes-from-staging-area">Remove changes from staging area</h2>
+<p>Sometimes you add changes by mistake or simply just want to exclude a few changes, then you can remove changes from the staging area back to change tracking.</p>
+<h5 id="single-file">Single file</h5>
+<p><code>git reset mymarkdowncode.md</code></p>
+<h5 id="every-file-in-the-staging-area">Every file in the staging area</h5>
+<p><code>git reset</code></p>
+<h2 id="stash-the-changes">Stash the changes</h2>
+<p>Sometimes you work in two different branches of the same repository. Trust me, it&rsquo;s easy to mess things up when juggling between two branches, I don&rsquo;t recommend doing that if you can focus on just one branch at a time instead.</p>
+<p>But if you realize that you have done some changes relating to one feature or part of your project that you are not ready to commit, you can stash them instead and then switch to another branch to make changes that should be committed to that branch, then commit those changes and switch back to the first branch where you stashed some changes. Now check out the changes again, continue editing where you left off and then you can commit the code to this branch.</p>
+<h5 id="stash-all-changes-in-current-branch">Stash all changes in current branch</h5>
+<p><code>git stash</code></p>
+<h5 id="list-the-stash">List the Stash</h5>
+<p><code>git stash list</code></p>
+<h5 id="show-the-files-in-the-stash">Show the files in the stash</h5>
+<p><code>git stash show</code></p>
+<h5 id="apply-the-stash-in-current-branch">Apply the stash in current branch</h5>
+<p><code>git stash apply</code></p>
+<h2 id="commit">Commit</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+git commit -<span style="color:#e6db74">&#39;Changed feature Myfeature
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">Feature Myfeature got five changes
+</span><span style="color:#e6db74">1
+</span><span style="color:#e6db74">2
+</span><span style="color:#e6db74">3
+</span><span style="color:#e6db74">4
+</span><span style="color:#e6db74">5
+</span><span style="color:#e6db74">&#39;</span>
+</code></pre></div><p>The commit message should describe what this change was about, the first row will be the headline and if you want to add more details about the changes you leave a blank line and it will only show up when someone wants to read the details for the commit.</p>
+<h2 id="push">Push</h2>
+<p>Push allows you to push changes from one branch to a remote branch.</p>
+<h5 id="push-your-local-changes-to-the-repository-server">Push your local changes to the repository server.</h5>
+<p><code>git push</code></p>
+<h2 id="pull">Pull</h2>
+<p>Pull allows you to pull changes from a remote branch to your local branch.</p>
+<h5 id="pull-changes-from-the-repository-server">Pull changes from the repository server.</h5>
+<p><code>git pull</code></p>
+<h2 id="merge">Merge</h2>
+<p>When you want to merge changes from one branch to another branch you use merge. Move to the branch you want to merge changes to.</p>
+<h5 id="merge-feature1-branch-into-main-branch">Merge feature1 branch into main branch</h5>
+<p><code>git switch main</code></p>
+<p>(Only needed  if you are not currently in the main branch)</p>
+<p><code>git merge feature1</code></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There is a learning curve to get used to working with Git, but you don&rsquo;t need to learn everything at once. To start with you may just want to setup your own repo in Github, clone it to your machine, and make your commits to the main/master branch. Then you can gradually make it more advanced with different branches etc. As I mentioned above, there is little to no reason to start learning the git cli, VSCode has a good Git integration and it&rsquo;s better to understand the git concepts than trying to learn the commands.</p>
+<p><strong>Next I&rsquo;ll write about some useful keyboard shortcuts and features in VSCode that will boost your productivity and make your life easier! Happy Coding!</strong></p>
+<p>/TheAutomationDude</p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="post-info">
+      
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1445 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2021-12-16 21:48
+        
+
+         
+          
+        
+      </p>
+    </div>
+      <hr />
+      <div class="sharing-buttons">
+        
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Using%20Git%20version%20control%20in%20VSCode&amp;caption=Using%20Git%20version%20control%20in%20VSCode&amp;canonicalUrl=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=Using%20Git%20version%20control%20in%20VSCode&amp;body=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f&amp;media=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f;description=Using%20Git%20version%20control%20in%20VSCode" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f&amp;title=Using%20Git%20version%20control%20in%20VSCode&amp;summary=Using%20Git%20version%20control%20in%20VSCode&amp;source=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f&amp;resubmit=true&amp;title=Using%20Git%20version%20control%20in%20VSCode" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f;title=Using%20Git%20version%20control%20in%20VSCode" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Using%20Git%20version%20control%20in%20VSCode%20https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f&amp;t=Using%20Git%20version%20control%20in%20VSCode" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Using%20Git%20version%20control%20in%20VSCode&amp;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fgitinvscode%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+      </div>
+
+    
+    <div class="pagination">
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/">
+                    <span class="button__text">Getting up and ready with VSCode</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/blog/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>
