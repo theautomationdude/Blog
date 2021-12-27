@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Productivity on theAutomationDude</title>
+    <link>https://theautomationdude.github.io/blog/tags/productivity/</link>
+    <description>Recent content in Productivity on theAutomationDude</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VSCode productivity features and keyboard shortcuts</title>
+      <link>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</guid>
+      <description>When you get used to VSCode you will experience a boos to your productivity. Some repetitive tasks when writing code are drastically reduced, with language support, intellisense and more, you don&amp;rsquo;t even need to remember the syntax very well. Keyboard shortcuts is another important feature when coding, since you don&amp;rsquo;t want to take your hands off the keyboard to use the mouse too often.
+Keyboard Shortcuts There is a keyboard shortcuts reference as https://code.</description>
+    </item>
+    
+  </channel>
+</rss>

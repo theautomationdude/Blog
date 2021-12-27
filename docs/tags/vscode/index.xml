@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>theAutomationDude</title>
-    <link>https://theautomationdude.github.io/blog/</link>
-    <description>Recent content on theAutomationDude</description>
+    <title>VSCode on theAutomationDude</title>
+    <link>https://theautomationdude.github.io/blog/tags/vscode/</link>
+    <description>Recent content in VSCode on theAutomationDude</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VSCode productivity features and keyboard shortcuts</title>
       <link>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</link>
@@ -45,38 +45,6 @@ To contribute to a software project, you can clone a repository and then push ne
       <guid>https://theautomationdude.github.io/blog/posts/installgit/</guid>
       <description>Whether you are developing applications, scripts or authoring Infrastructure As Code such as ARM, Bicep, Cloudformation, Google Cloud Deployment Manager or Terraform -templates, version control is important and at the heart of the DevOps toolkit. The most popular and widely adopted version control tool is Git, developed by Linus Torvalds – the inventor of the Linux kernel.
 If you work in VSCode, you won&amp;rsquo;t need to learn the git-cli commands, since VSCode has built-in support for git.</description>
-    </item>
-    
-    <item>
-      <title>How setup Powershell for Azure</title>
-      <link>https://theautomationdude.github.io/blog/posts/setupazpowershell/</link>
-      <pubDate>Thu, 02 Dec 2021 17:22:08 +0100</pubDate>
-      
-      <guid>https://theautomationdude.github.io/blog/posts/setupazpowershell/</guid>
-      <description>If you are using the Azure Cloud shell, you already have a useful powershell environment setup for you there by Microsoft&amp;hellip;
-But it&amp;rsquo;s not that unusual that employers want to keep all your code in a repo that is company controlled and where your teammates can access your files, and that repo may not always be directly accessible from the cloud shell.
-For that purpose, you might want to setup your own Powershell environment on the computer you work from.</description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://theautomationdude.github.io/blog/about/</link>
-      <pubDate>Mon, 29 Nov 2021 21:09:00 +0100</pubDate>
-      
-      <guid>https://theautomationdude.github.io/blog/about/</guid>
-      <description>Whoami I&amp;rsquo;m an automation dude and IT professional with more than 20 years experience. theAutomationDude sounds kewl and all, but my real name is Peter Östman and I live south of Stockholm - Sweden.
-I got a background in traditional IT Infrastructure, architecture and security. The latter part of my career has centered around automation, cloud and devops.
-The Blog In this blog I&amp;rsquo;ll share my thoughs related to just about anything cloud, code, devops and IT in general, basically anything that comes to mind.</description>
-    </item>
-    
-    <item>
-      <title>What are the reasons for cloud adoption?</title>
-      <link>https://theautomationdude.github.io/blog/posts/whycloud/</link>
-      <pubDate>Mon, 22 Nov 2021 12:22:08 +0100</pubDate>
-      
-      <guid>https://theautomationdude.github.io/blog/posts/whycloud/</guid>
-      <description>The truth is, there are many reasons to use a cloud service, and the priority of those reasons will vary from case to case. But it&amp;rsquo;s important to know these reasons, and how you prioritize them, since they are the drivers of the cloud journey. By understanding which reasons that are most important to your mission, it will help your decision-making process.
-Some examples of decisions impacted by these drivers:</description>
     </item>
     
   </channel>

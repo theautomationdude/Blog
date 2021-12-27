@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Governance on theAutomationDude</title>
+    <link>https://theautomationdude.github.io/blog/tags/governance/</link>
+    <description>Recent content in Governance on theAutomationDude</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 22 Nov 2021 12:22:08 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/governance/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>What are the reasons for cloud adoption?</title>
+      <link>https://theautomationdude.github.io/blog/posts/whycloud/</link>
+      <pubDate>Mon, 22 Nov 2021 12:22:08 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/whycloud/</guid>
+      <description>The truth is, there are many reasons to use a cloud service, and the priority of those reasons will vary from case to case. But it&amp;rsquo;s important to know these reasons, and how you prioritize them, since they are the drivers of the cloud journey. By understanding which reasons that are most important to your mission, it will help your decision-making process.
+Some examples of decisions impacted by these drivers:</description>
+    </item>
+    
+  </channel>
+</rss>

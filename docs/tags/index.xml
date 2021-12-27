@@ -6,6 +6,97 @@
     <description>Recent content in Tags on theAutomationDude</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure</title>
+      <link>https://theautomationdude.github.io/blog/tags/azure/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/azure/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Powershell</title>
+      <link>https://theautomationdude.github.io/blog/tags/powershell/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Productivity</title>
+      <link>https://theautomationdude.github.io/blog/tags/productivity/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/productivity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>VSCode</title>
+      <link>https://theautomationdude.github.io/blog/tags/vscode/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/vscode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://theautomationdude.github.io/blog/tags/windows/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://theautomationdude.github.io/blog/tags/git/</link>
+      <pubDate>Thu, 16 Dec 2021 21:48:27 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bicep</title>
+      <link>https://theautomationdude.github.io/blog/tags/bicep/</link>
+      <pubDate>Sun, 12 Dec 2021 09:48:44 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/bicep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Architecture</title>
+      <link>https://theautomationdude.github.io/blog/tags/architecture/</link>
+      <pubDate>Mon, 22 Nov 2021 12:22:08 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cloud</title>
+      <link>https://theautomationdude.github.io/blog/tags/cloud/</link>
+      <pubDate>Mon, 22 Nov 2021 12:22:08 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/cloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Governance</title>
+      <link>https://theautomationdude.github.io/blog/tags/governance/</link>
+      <pubDate>Mon, 22 Nov 2021 12:22:08 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/governance/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on theAutomationDude</title>
+    <link>https://theautomationdude.github.io/blog/tags/windows/</link>
+    <description>Recent content in Windows on theAutomationDude</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VSCode productivity features and keyboard shortcuts</title>
+      <link>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</link>
+      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</guid>
+      <description>When you get used to VSCode you will experience a boos to your productivity. Some repetitive tasks when writing code are drastically reduced, with language support, intellisense and more, you don&amp;rsquo;t even need to remember the syntax very well. Keyboard shortcuts is another important feature when coding, since you don&amp;rsquo;t want to take your hands off the keyboard to use the mouse too often.
+Keyboard Shortcuts There is a keyboard shortcuts reference as https://code.</description>
+    </item>
+    
+    <item>
+      <title>Getting up and ready with VSCode</title>
+      <link>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</link>
+      <pubDate>Sun, 12 Dec 2021 09:48:44 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/gettingupandreadywithvscode/</guid>
+      <description>When you are authoring or editing any type of code or markdown text, VSCode can be a powerfull ally. It will give you syntaxt highlighting and intellisense for most modern programming languages and there is a wide set of extensions to make your life easier. If that wasn&amp;rsquo;t enough, VSCode also has built-in support for Git, meaning that you don&amp;rsquo;t need to learn all the Git commandline syntax and you get a visualization of your branches, commits, staged changes and stash.</description>
+    </item>
+    
+    <item>
+      <title>Install Git version control on a Windows PC</title>
+      <link>https://theautomationdude.github.io/blog/posts/installgit/</link>
+      <pubDate>Tue, 07 Dec 2021 17:44:31 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/installgit/</guid>
+      <description>Whether you are developing applications, scripts or authoring Infrastructure As Code such as ARM, Bicep, Cloudformation, Google Cloud Deployment Manager or Terraform -templates, version control is important and at the heart of the DevOps toolkit. The most popular and widely adopted version control tool is Git, developed by Linus Torvalds – the inventor of the Linux kernel.
+If you work in VSCode, you won&amp;rsquo;t need to learn the git-cli commands, since VSCode has built-in support for git.</description>
+    </item>
+    
+  </channel>
+</rss>
