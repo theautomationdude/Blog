@@ -21,6 +21,11 @@ tags:
 # VSCode 2
 VSCode keyboard shortcuts
 https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
+
+# Community ideas
+- I really notice how my contribution to the community is having effect (inspired by Mike Pfeifers "call to arms"). Students and engineers of different seniority are starting to follow me, sharing my posts etc. This stuff is really working and has great potential.
+- How can we make the /Cloudskills / Cloud Career builders community reach people that haven't yet chosen a career? I challenge the whole community (and Mike, I'm turning up the difficulty a bit here, hope you are up for it) to bring forward ideas.
+- Team up with Neurophysiological disorder specialists to find ways to make our profession accessible for the people with diagnoses like ADHD, ADD and similar.
 # The power of Powershell
 - What is so good about Powershell so good? 
 - Example with Role Definition, adding permissions with the "add" method instead of editing the json. 

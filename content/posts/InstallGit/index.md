@@ -6,9 +6,17 @@ date: 2021-12-07T17:44:31+01:00
 
 draft: false
 
-comments: true
+comments: true 
+
+toc: false
 
 images:
+
+tags:
+  - Git
+  - Windows
+  - VSCode
+  - Powershell
 
 --- 
 

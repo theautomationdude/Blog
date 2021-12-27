@@ -8,7 +8,17 @@ draft: false
 
 comments: true
 
+toc: false
+
 images:
+
+tags:
+  - VSCode
+  - Azure
+  - Bicep
+  - Git
+  - Windows
+  - Powershell
 
 --- 
 

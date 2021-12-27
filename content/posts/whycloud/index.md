@@ -8,7 +8,15 @@ draft: false
 
 comments: true 
 
-images: 
+toc: false
+
+images:
+
+tags:
+  - Cloud
+  - Azure
+  - Architecture
+  - Governance
 
 --- 
 ![Clouds](./clouds.jpg)

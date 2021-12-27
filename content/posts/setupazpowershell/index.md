@@ -8,7 +8,13 @@ draft: false
 
 comments: true 
 
+toc: false
+
 images:
+
+tags:
+  - Azure
+  - PowerShell
 
 --- 
 
