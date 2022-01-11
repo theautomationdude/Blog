@@ -54,7 +54,7 @@ This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli 
 <meta itemprop="description" content="This guide will give you an introduction to use Management Groups in Azure and how to create them as code. If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.
 This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli install instructions   VSCode &#43; Bicep Extension Getting Up And Ready With VSCode and VSCode Productivity hints   Azure Powershell Setup Azure Powershell    Azure Account Register Free Azure Account    User account with sufficient privileges to create Management Groups in the Tenant Root group Register Free Azure Account (See the &ldquo;Enable Management Groups&rdquo; section)    ManagementGroup Structure ManagementGroups are basically containers that contains your organisations subscriptions."><meta itemprop="datePublished" content="2022-01-10T21:46:54+01:00" />
 <meta itemprop="dateModified" content="2022-01-10T21:46:54+01:00" />
-<meta itemprop="wordCount" content="1229"><meta itemprop="image" content="https://theautomationdude.github.io/blog"/>
+<meta itemprop="wordCount" content="1600"><meta itemprop="image" content="https://theautomationdude.github.io/blog"/>
 <meta itemprop="keywords" content="Azure,Bicep,PowerShell,MicrosoftCloudAdoptionFramework,EnterpriseScale," />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://theautomationdude.github.io/blog"/>
@@ -144,7 +144,7 @@ This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli 
           <circle cx="12" cy="12" r="10"></circle>
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
-        6 minutes
+        8 minutes
 
         
       </p>
@@ -255,7 +255,55 @@ ParentDisplayName <span style="color:#960050;background-color:#1e0010">:</span>
 </code></pre></div><h2 id="deploying">Deploying</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">New-AzManagementGroupDeployment -ManagementGroupId $ManagementGroup.Id -Templatefile <span style="color:#e6db74">&#34;.\main.bicep&#34;</span> -Name <span style="color:#e6db74">&#39;MananagementGroupsDeployment&#39;</span> -Location <span style="color:#e6db74">&#39;WestEurope&#39;</span>
 </code></pre></div><p>Please note that for <em>Location</em> you can use your location of preference.</p>
-<h1 id="move-the-existing-subscription-into-a-management-group">Move the existing subscription into a management group</h1>
+<h1 id="move-the-existing-subscription-into-a-management-group-with-powershell">Move the existing subscription into a management group with PowerShell</h1>
+<p>The quickest and easiest way to move a subscription into a management group is by using Azure Powershell or Azure Cli.To use PowerShell you just use the New-AzManagementGroupSubscription cmdlet as below. (replace the subscriptionId with the id of the subscription you want to move and the GroupId with the management group you want to move it into)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell"><span style="color:#75715e">#Alternative 1: Using variables to supply the parameters</span>
+$SubscriptionId = <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
+$GroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>
+
+New-AzManagementGroupSubscription -GroupId $GroupId -SubscriptionId $SubscriptionId
+
+<span style="color:#75715e">#Alternative 2: Using splatting to supply the parameters</span>
+$Params = @{
+  SubscriptionId = <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
+  GroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>
+}
+
+New-AzManagementGroupSubscription @Params
+
+<span style="color:#75715e">#Alternative 3: Using splatting with parameters in the hashtable, useful in a script where you are iterating through a loop</span>
+$SubscriptionId = <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
+$GroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>
+
+$Params = @{
+  SubscriptionId = $SubscriptionId
+  GroupId = $GroupId
+}
+
+New-AzManagementGroupSubscription @Params
+
+<span style="color:#75715e">#Alternative 4: Just supplying the values to each parameter without variables</span>
+
+New-AzManagementGroupSubscription -GroupId <span style="color:#e6db74">&#39;Corp&#39;</span> -SubscriptionId <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
+</code></pre></div><h1 id="moving-the-subscription-with-bicep">Moving the subscription with Bicep</h1>
+<p>You can also move the subscription by deploying an ARM or Bicep template file. This example uses Bicep, and I recommend Bicep over ARM except for the few cases where there is some Bicep limitation leaving you without a choice. Microsoft is still developing Bicep, but it already has a great coverage in Azure.</p>
+<p><strong>Download this <a href="movesubscription.bicep">Bicep File</a></strong>, then deploy the template with Azure PowerShell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
+$Params = @{
+    Templatefile = <span style="color:#e6db74">&#39;.\MoveSubscription.bicep&#39;</span>
+    TemplateParameterObject = @{
+        TargetMgId = <span style="color:#e6db74">&#39;Corp&#39;</span>
+        subscriptionId = <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
+    }
+    Location = <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+    Name = <span style="color:#e6db74">&#39;MovingSubscriptionFoo&#39;</span>
+}
+
+New-AzTenantDeployment @Params
+</code></pre></div><p>Notice that the parameters defined in the Bicep file was passed in the <em>TemplateParameterObject</em> parameter as a hashtable, to be consumed in the <em>Name</em> key in the Bicepfile.</p>
+<p>For this use-case, deploying the Bicep feels like taking the long route, but getting used to working with Bicep is very useful for a lot of other use-cases.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. <strong>If you are interrested in a post about those scenarios, you can contact me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedId</a>.</strong></p>
 
       </div>
     </article>
@@ -290,7 +338,7 @@ ParentDisplayName <span style="color:#960050;background-color:#1e0010">:</span>
           <line x1="16" y1="17" x2="8" y2="17"></line>
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
-        1229 Words
+        1600 Words
       </p>
 
       <p>

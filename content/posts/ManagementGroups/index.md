@@ -120,6 +120,61 @@ ParentDisplayName :
 New-AzManagementGroupDeployment -ManagementGroupId $ManagementGroup.Id -Templatefile ".\main.bicep" -Name 'MananagementGroupsDeployment' -Location 'WestEurope'
 ```
 Please note that for *Location* you can use your location of preference.
+# Move the existing subscription into a management group with PowerShell
+The quickest and easiest way to move a subscription into a management group is by using Azure Powershell or Azure Cli.To use PowerShell you just use the New-AzManagementGroupSubscription cmdlet as below. (replace the subscriptionId with the id of the subscription you want to move and the GroupId with the management group you want to move it into)
+```Powershell
+#Alternative 1: Using variables to supply the parameters
+$SubscriptionId = '12345678-1234-1234-1234-123456789012'
+$GroupId = 'Corp'
 
+New-AzManagementGroupSubscription -GroupId $GroupId -SubscriptionId $SubscriptionId
 
-# Move the existing subscription into a management group
+#Alternative 2: Using splatting to supply the parameters
+$Params = @{
+  SubscriptionId = '12345678-1234-1234-1234-123456789012'
+  GroupId = 'Corp'
+}
+
+New-AzManagementGroupSubscription @Params
+
+#Alternative 3: Using splatting with parameters in the hashtable, useful in a script where you are iterating through a loop
+$SubscriptionId = '12345678-1234-1234-1234-123456789012'
+$GroupId = 'Corp'
+
+$Params = @{
+  SubscriptionId = $SubscriptionId
+  GroupId = $GroupId
+}
+
+New-AzManagementGroupSubscription @Params
+
+#Alternative 4: Just supplying the values to each parameter without variables
+
+New-AzManagementGroupSubscription -GroupId 'Corp' -SubscriptionId '12345678-1234-1234-1234-123456789012'
+```
+# Moving the subscription with Bicep
+You can also move the subscription by deploying an ARM or Bicep template file. This example uses Bicep, and I recommend Bicep over ARM except for the few cases where there is some Bicep limitation leaving you without a choice. Microsoft is still developing Bicep, but it already has a great coverage in Azure.
+
+**Download this [Bicep File](movesubscription.bicep)**, then deploy the template with Azure PowerShell.
+```Powershell
+#Splatting parameters to make it more readable
+$Params = @{
+    Templatefile = '.\MoveSubscription.bicep'
+    TemplateParameterObject = @{
+        TargetMgId = 'Corp'
+        subscriptionId = '12345678-1234-1234-1234-123456789012'
+    }
+    Location = 'WestEurope'
+    Name = 'MovingSubscriptionFoo'
+}
+
+New-AzTenantDeployment @Params
+```
+
+Notice that the parameters defined in the Bicep file was passed in the *TemplateParameterObject* parameter as a hashtable, to be consumed in the *Name* key in the Bicepfile.
+
+For this use-case, deploying the Bicep feels like taking the long route, but getting used to working with Bicep is very useful for a lot of other use-cases.
+
+# Conclusion
+Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. **If you are interrested in a post about those scenarios, you can contact me on [LinkedId](https://www.linkedin.com/in/peter-the-automator/).**
+
