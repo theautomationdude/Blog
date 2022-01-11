@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Azure AD on theAutomationDude</title>
+    <link>https://theautomationdude.github.io/blog/tags/azure-ad/</link>
+    <description>Recent content in Azure AD on theAutomationDude</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Mon, 10 Jan 2022 21:03:06 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/azure-ad/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Register and setup a free Azure Account</title>
+      <link>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</link>
+      <pubDate>Mon, 10 Jan 2022 21:03:06 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</guid>
+      <description>Register a Microsoft account If you don&amp;rsquo;t have a Microsoft account or simply want a separate account for learning, go to https://outlook.live.com/ to register a new account.
+  Install Microsoft Authenticator on your mobile device https://www.microsoft.com/en-us/security/mobile-authenticator-app
+  Sign in to your Microsoft account. Click the account icon in the top right corner of outlook and enter the profile settings for your account. Then choose Security from the menu in the top of the page.</description>
+    </item>
+    
+  </channel>
+</rss>

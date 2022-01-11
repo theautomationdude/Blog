@@ -7,22 +7,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jan 2022 21:46:54 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure</title>
       <link>https://theautomationdude.github.io/blog/tags/azure/</link>
-      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/azure/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Bicep</title>
+      <link>https://theautomationdude.github.io/blog/tags/bicep/</link>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/bicep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EnterpriseScale</title>
+      <link>https://theautomationdude.github.io/blog/tags/enterprisescale/</link>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/enterprisescale/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MicrosoftCloudAdoptionFramework</title>
+      <link>https://theautomationdude.github.io/blog/tags/microsoftcloudadoptionframework/</link>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/microsoftcloudadoptionframework/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Powershell</title>
       <link>https://theautomationdude.github.io/blog/tags/powershell/</link>
-      <pubDate>Mon, 27 Dec 2021 15:30:22 +0100</pubDate>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/powershell/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Azure AD</title>
+      <link>https://theautomationdude.github.io/blog/tags/azure-ad/</link>
+      <pubDate>Mon, 10 Jan 2022 21:03:06 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/azure-ad/</guid>
       <description></description>
     </item>
     
@@ -59,15 +95,6 @@
       <pubDate>Thu, 16 Dec 2021 21:48:27 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bicep</title>
-      <link>https://theautomationdude.github.io/blog/tags/bicep/</link>
-      <pubDate>Sun, 12 Dec 2021 09:48:44 +0100</pubDate>
-      
-      <guid>https://theautomationdude.github.io/blog/tags/bicep/</guid>
       <description></description>
     </item>
     

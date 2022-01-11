@@ -2,7 +2,7 @@
 
 title: "Register and setup a free Azure Account" 
 
-date: 2021-12-25T11:24:06+01:00 
+date: 2022-01-10T21:03:06+01:00 
 
 draft: false
 
@@ -41,18 +41,26 @@ There are also Azure roles like *User Access Administrator* or *Owner* that have
 The *Global Administrator* role is very powerful and can gain access to all other roles in your account by elevating access, this account must be well protected and should only be used for the very few tasks that require this role.
 
 # Elevate your account 
-You can elevate your *Global administrator* to give it access to the resources in Azure. Open [Azure Active Directory Admin Center](https://aad.portal.azure.com/) and follow the instructions in [https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin](https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin). (While you are at it, you can also set your custom name for your tenant) Basically you will elevate your user account with the *User Access Administrator* in the root of the tenant in order to later assign roles to other users Management Group structure. 
+You can elevate your *Global administrator* to give it access to the resources in Azure. Open [Azure Active Directory Admin Center](https://aad.portal.azure.com/) and follow the instructions in [https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin](https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin). (While you are at it, you can also set your custom name for your tenant) Basically you will elevate your user account to *User Access Administrator* in the root of the tenant in order to later assign roles to other users Management Group structure. 
 
 
 ### Enable Management Groups
-In the portal write "Management Groups" to get to the Management Groups blade. Azure will ask if you want to start using management groups, and yes that is exactly what you want. Enable management groups and then click the *Tenant root group*. 
+In the portal, write "Management Groups", to get to the Management Groups blade. Azure will ask if you want to start using management groups, and yes, that is exactly what you want. Enable management groups and then click the *Tenant root group*. 
 ![tenantrootgroup.png](tenantrootgroup.png)
 Next you select *Access control (IAM)* and then *Add*, *Add role assignment*. ![rbac.png](rbac.png)
 Select the *Owner* role and then *Members*, now you can add the users that you want to have the *Owner* role for the *Tenant root group*, please be aware that they will have the owner privileges to everything in your Azure account, except Azure Active Directory. It's recommended to give this privilege only to the individuals that manages the management group structure and high level compliance like role and policy definitions. Then they can delegate the owner role on any scope under this one. Remember to follow the rule of least privilege access. 
 
+To provide a user Owner privileges to the root of the tenant you can use Powershell.
+#### I recommend the PowerShell method over using the Azure Portal, especially if you need to deploy Management Groups in the Tenant Root Group with PowerShell (I have experienced issues with trying to do it with the portal).
+
+```Powershell
+New-AzRoleAssignment -Scope '/' -RoleDefinitionName 'Owner' -SignInName 'usersigninname@thetenantname.onmicrosoft.com'
+```
+Remember to use the sign-in name you find for the user in the Azure Active Directory blade, since the sign-in name may differ if the user is created in another tenant from start.
+
 For the purpose of learning and labs you can give all access to your single user, allthough that is not recommended for any production scenarios.
 
-Once you have assigned the *Owner* you should go back to the Active Directory blade and disable the "Access Management for Azure Resources" to remove your account from the *User Access Administrator* role again. If you selected the same account as an Owner of the *Tenant root group*, you will still be able to manage resources in the account. If you selected another user, you will have to do any future steps in that user context instead.
+Once you have assigned the *Owner* role, you should go back to the Active Directory blade and disable the "Access Management for Azure Resources" to remove your account from the *User Access Administrator* role again. If you selected the same account as an Owner of the *Tenant root group*, you will still be able to manage resources in the account. If you selected another user, you will have to do any future steps in that user context instead.
 
 You'll notice that Azure has created a single subscription that is now in the "Tenant root group*, we can move this subscription into a management group later on, when the management group structure is deployed.
 

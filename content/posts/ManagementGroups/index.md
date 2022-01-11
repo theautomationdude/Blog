@@ -2,7 +2,7 @@
 
 title: "Azure Management Groups, as Code" 
 
-date: 2021-12-27T11:24:06+01:00 
+date: 2022-01-10T21:46:54+01:00 
 
 draft: false
 
@@ -20,14 +20,28 @@ tags:
   - EnterpriseScale
 
 --- 
+This guide will give you an introduction to use Management Groups in Azure and how to create them as code.
+If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready. 
+##### This guide depends on the following:
+
+|Tool | Link |
+| ----------- | ----------- |
+|Azure Bicep Cli | [Bicep Cli install instructions](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)|
+|VSCode + Bicep Extension | [Getting Up And Ready With VSCode](/blog/posts/gettingupandreadywithvscode/) and [VSCode Productivity hints](/blog/posts/vscodeproductivity/)|
+|Azure Powershell | [Setup Azure Powershell ](/blog/posts/setupazpowershell/)|
+|Azure Account | [Register Free Azure Account ](/blog/posts/RegisterFreeAzureAccount/)|
+|User account with sufficient privileges to create Management Groups in the Tenant Root group | [Register Free Azure Account](/blog/posts/registerfreeazureaccount/) (*See the "Enable Management Groups" section*)|
+
 
 # ManagementGroup Structure
 ManagementGroups are basically containers that contains your organisations subscriptions.
-By defining Roles and Policies and assigning those on a ManagementGroup, the definitions and assignments of those will be inherited down the hierarchy to other management groups subscriptions, resourcegroups and finally resources. 
+By defining Roles and Policies and assigning those to ManagementGroups, the definitions and assignments of those will be inherited down the hierarchy to other management groups subscriptions, resourcegroups and finally resources. 
 
 ![Scope-levels](scope-levels.png)
  
- For enterprise scale Azure environments this is a very good governance tool. The management group structure cascades down from the "Tenant Root Group" which is the first Management group that Azure automatically creates for you, **this group cannot be deleted and will allways be the top scope**.
+For enterprise scale Azure environments this is a very good governance tool. The management group structure cascades down from the "Tenant Root Group" which is the first Management group that Azure automatically creates for you, **this group cannot be deleted and will allways be the top scope**.
+
+By default no user has any privileges on the Tenant Root Group, but a 
 
 ## The Microsoft Cloud Adoption Framework
 Microsoft has developed architectural guidelines for cloud adoption - the [Microsoft Cloud Adoption framework](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/) which is a proven framework for successful cloud adoption. I strongly recommend that you give it a good read before implementing Azure for an organization. Bundled with this is also a lot of templates and artifacts that you can use as base for your Azure landing zones, have a look at this [Enterprise Scale Github repository](https://github.com/Azure/Enterprise-Scale). This will give you the foundation from where you can define your Azure Landing Zones - the templates for any new subscriptions you issue for your organization. 
@@ -35,16 +49,16 @@ Microsoft has developed architectural guidelines for cloud adoption - the [Micro
 ## Defining your Management Group Structure - as code
 You can build your management group structure from the Azure portal, but by defining it as code, you will get a version controlled, modular and reusable deployment method.
 
+
+
 The management group structure we will deploy for lab purposes will be based on one that Microsoft have examplified in the picture below for Microsofts favourite example organization - *Contoso*. You can modify this structure to fit your organization, but I recommend you to stay as close to the Microsoft model as possible.
 
 ![Managementgroup-structure](managementgroup-structure.png)
 
-I've made an [Azure Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) file that represents the modified deployment we will to make to the tenant root group. 
-
-I've prepared a [bicep file](main.bicep), but I suggest you just use it as support for writing your own file, just to get the hands on practice with Bicep and VSCode.
+I have made an [Azure Bicep](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview) file that represents the modified deployment we will to make to the tenant root group. **Open or download the [bicep file](main.bicep)**, but I suggest you just use it as support for writing your own file, just to get the hands on practice with Bicep and VSCode.
 
 #### targetScope
-The file starts with the statement `targetScope = 'managementGroup'`, this tells Bicep that this deployment is going to be deployed to the management group scope, and the syntax used in the template will be analyzed from that perspective. If you start typing `tar` and press `Ctrl+Space`, the VSCode Bicep extension intellisense will suggest the word `targetscope`, accept it by pressing enter.
+The [file](main.bicep) starts with the statement `targetScope = 'managementGroup'`, this tells Bicep that this deployment is going to be deployed to the management group scope, and the syntax used in the template will be analyzed from that perspective. If you start typing `tar` and press `Ctrl+Space`, the VSCode Bicep extension intellisense will suggest the word `targetscope`, accept it by pressing enter.
 ![targetscope intellisense](targetscope-intellisense.png)
 
 To get the syntax in VSCode with the bicep extension you can write the keyword like `targetscope =`.
@@ -103,8 +117,9 @@ ParentDisplayName :
 
 ## Deploying
 ```Powershell
-New-AzResourceGroupDeployment -ManagementGroup $ManagementGroup -Templatefile ".\Main.bicep"
+New-AzManagementGroupDeployment -ManagementGroupId $ManagementGroup.Id -Templatefile ".\main.bicep" -Name 'MananagementGroupsDeployment' -Location 'WestEurope'
 ```
+Please note that for *Location* you can use your location of preference.
 
 
 # Move the existing subscription into a management group

@@ -7,7 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Jan 2022 21:46:54 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/azure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Management Groups, as Code</title>
+      <link>https://theautomationdude.github.io/blog/posts/managementgroups/</link>
+      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/managementgroups/</guid>
+      <description>This guide will give you an introduction to use Management Groups in Azure and how to create them as code. If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.
+This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli install instructions   VSCode + Bicep Extension Getting Up And Ready With VSCode and VSCode Productivity hints   Azure Powershell Setup Azure Powershell    Azure Account Register Free Azure Account    User account with sufficient privileges to create Management Groups in the Tenant Root group Register Free Azure Account (See the &amp;ldquo;Enable Management Groups&amp;rdquo; section)    ManagementGroup Structure ManagementGroups are basically containers that contains your organisations subscriptions.</description>
+    </item>
+    
+    <item>
+      <title>Register and setup a free Azure Account</title>
+      <link>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</link>
+      <pubDate>Mon, 10 Jan 2022 21:03:06 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</guid>
+      <description>Register a Microsoft account If you don&amp;rsquo;t have a Microsoft account or simply want a separate account for learning, go to https://outlook.live.com/ to register a new account.
+  Install Microsoft Authenticator on your mobile device https://www.microsoft.com/en-us/security/mobile-authenticator-app
+  Sign in to your Microsoft account. Click the account icon in the top right corner of outlook and enter the profile settings for your account. Then choose Security from the menu in the top of the page.</description>
+    </item>
+    
     <item>
       <title>VSCode productivity features and keyboard shortcuts</title>
       <link>https://theautomationdude.github.io/blog/posts/vscodeproductivity/</link>

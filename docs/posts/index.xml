@@ -6,8 +6,166 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Mon, 27 Dec 2021 15:30:22 +0100</lastBuildDate>
+        <lastBuildDate>Mon, 10 Jan 2022 21:46:54 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Azure Management Groups, as Code</title>
+            <link>https://theautomationdude.github.io/blog/posts/managementgroups/</link>
+            <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/managementgroups/</guid>
+            <description>This guide will give you an introduction to use Management Groups in Azure and how to create them as code. If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.
+This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli install instructions   VSCode + Bicep Extension Getting Up And Ready With VSCode and VSCode Productivity hints   Azure Powershell Setup Azure Powershell    Azure Account Register Free Azure Account    User account with sufficient privileges to create Management Groups in the Tenant Root group Register Free Azure Account (See the &amp;ldquo;Enable Management Groups&amp;rdquo; section)    ManagementGroup Structure ManagementGroups are basically containers that contains your organisations subscriptions.</description>
+            <content type="html"><![CDATA[<p>This guide will give you an introduction to use Management Groups in Azure and how to create them as code.
+If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.</p>
+<h5 id="this-guide-depends-on-the-following">This guide depends on the following:</h5>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bicep Cli</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install">Bicep Cli install instructions</a></td>
+</tr>
+<tr>
+<td>VSCode + Bicep Extension</td>
+<td><a href="/blog/posts/gettingupandreadywithvscode/">Getting Up And Ready With VSCode</a> and <a href="/blog/posts/vscodeproductivity/">VSCode Productivity hints</a></td>
+</tr>
+<tr>
+<td>Azure Powershell</td>
+<td><a href="/blog/posts/setupazpowershell/">Setup Azure Powershell </a></td>
+</tr>
+<tr>
+<td>Azure Account</td>
+<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+</tr>
+<tr>
+<td>User account with sufficient privileges to create Management Groups in the Tenant Root group</td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account</a> (<em>See the &ldquo;Enable Management Groups&rdquo; section</em>)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="managementgroup-structure">ManagementGroup Structure</h1>
+<p>ManagementGroups are basically containers that contains your organisations subscriptions.
+By defining Roles and Policies and assigning those to ManagementGroups, the definitions and assignments of those will be inherited down the hierarchy to other management groups subscriptions, resourcegroups and finally resources.</p>
+<p><img src="scope-levels.png" alt="Scope-levels"></p>
+<p>For enterprise scale Azure environments this is a very good governance tool. The management group structure cascades down from the &ldquo;Tenant Root Group&rdquo; which is the first Management group that Azure automatically creates for you, <strong>this group cannot be deleted and will allways be the top scope</strong>.</p>
+<p>By default no user has any privileges on the Tenant Root Group, but a</p>
+<h2 id="the-microsoft-cloud-adoption-framework">The Microsoft Cloud Adoption Framework</h2>
+<p>Microsoft has developed architectural guidelines for cloud adoption - the <a href="https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/">Microsoft Cloud Adoption framework</a> which is a proven framework for successful cloud adoption. I strongly recommend that you give it a good read before implementing Azure for an organization. Bundled with this is also a lot of templates and artifacts that you can use as base for your Azure landing zones, have a look at this <a href="https://github.com/Azure/Enterprise-Scale">Enterprise Scale Github repository</a>. This will give you the foundation from where you can define your Azure Landing Zones - the templates for any new subscriptions you issue for your organization.</p>
+<h2 id="defining-your-management-group-structure---as-code">Defining your Management Group Structure - as code</h2>
+<p>You can build your management group structure from the Azure portal, but by defining it as code, you will get a version controlled, modular and reusable deployment method.</p>
+<p>The management group structure we will deploy for lab purposes will be based on one that Microsoft have examplified in the picture below for Microsofts favourite example organization - <em>Contoso</em>. You can modify this structure to fit your organization, but I recommend you to stay as close to the Microsoft model as possible.</p>
+<p><img src="managementgroup-structure.png" alt="Managementgroup-structure"></p>
+<p>I have made an <a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview">Azure Bicep</a> file that represents the modified deployment we will to make to the tenant root group. <strong>Open or download the <a href="main.bicep">bicep file</a></strong>, but I suggest you just use it as support for writing your own file, just to get the hands on practice with Bicep and VSCode.</p>
+<h4 id="targetscope">targetScope</h4>
+<p>The <a href="main.bicep">file</a> starts with the statement <code>targetScope = 'managementGroup'</code>, this tells Bicep that this deployment is going to be deployed to the management group scope, and the syntax used in the template will be analyzed from that perspective. If you start typing <code>tar</code> and press <code>Ctrl+Space</code>, the VSCode Bicep extension intellisense will suggest the word <code>targetscope</code>, accept it by pressing enter.
+<img src="targetscope-intellisense.png" alt="targetscope intellisense"></p>
+<p>To get the syntax in VSCode with the bicep extension you can write the keyword like <code>targetscope =</code>.
+VSCode will suggest <code>'managementGroup'</code> if you press <code>Ctrl+Space</code>, you scroll down with your arrow keys and accept the suggestion by pressing enter.
+<img src="managementgroup-intellisense.png" alt="managementgroup intellisense"></p>
+<h3 id="resource">resource</h3>
+<p>Next you need to define your organizations top level management group that will be deployed in the Tenant Root Group. Start by typing the keyword <code>resource</code>, if intellisense pops up the word for you, just accept the suggestion with enter. 
+<img src="resource-intellisense.png" alt="Resource">
+Next add the name for this bicep resource, I&rsquo;ll use the same name (MyOrgName) for the resource as the name for the managment group. Other related resources can refer to properties of this resource by referencing the resourcename.propertyname, it will be clearer as we move along. You can use your organisation name like Microsoft have used the &ldquo;Contoso&rdquo; in their example.</p>
+<p>Next you press <code>Ctrl+Space</code> to select the resource type. You can start typing <code>managementGroups</code> or simply scroll all the way through the list with arrowkeys and <code>PageUp</code> / <code>PageDown</code> keys until you find the resource. Confirm the list-item with the <code>Enter</code> key. Next VSCode should ask you for the API-version, if not you just press <code>Ctrl+Space</code> to get that syntax suggestion. I usually choose the latest API-version. Just keep using <code>Ctrl+Space</code> arrowkeys and enter to get the syntax suggestions for <code>=</code> and <code>required properties</code>.</p>
+<h4 id="name">Name</h4>
+<p>Now you should have the <code>name:</code> tag there encapsulated by <code>{ }</code>. Enter a name for your top management group (I used &lsquo;MyOrgName&rsquo;) encapsulated by <code>' '</code>.</p>
+<h4 id="scope">Scope</h4>
+<p>In the line after the <code>name</code> tag, press <code>Ctrl+Space</code> and select <code>scope</code>, then use the tenant() <em>function</em> as scope.</p>
+<h4 id="display-name">Display Name</h4>
+<p>Keep using the <code>Ctrl+Space</code>to build the resource definition. The <code>displayName</code>is a subkey to the <code>properties</code> key and can be the same as <code>name</code> or a more verbose descriptive name that will be shown in the overview in the Azure portal. The <code>name</code> is the unique identifier for this management group.</p>
+<h4 id="parent">Parent</h4>
+<p>The parent key is a reference to where in the management group structure this management group will be located. By referencing the id of the parent management group it will be a child to that one.</p>
+<p><strong>Now things might get a little confusing, but the Bicep extension will help you getting things right!</strong> (Doing the same thing with ARM-json is much worse, I promise!)</p>
+<p>You will reference the <strong>management group id</strong> in the <code>id</code> key which is a subkey to the <code>parent</code> key. The <em>parent</em> key is inside the <code>details</code> key which is inside the <code>properties</code> key. You get a lot of navigation assistance for the hierarchy of the Bicep code from the indentation, bracket colors and the guides to the left.
+<img src="top-level-mgmtgroup.png" alt="bicep key hierarchy"></p>
+<p>To specify the id of the target management group for this deployment (in this case the Tenant Root group) you can use the Bicep function <code>managementGroup().id</code>.</p>
+<h3 id="next-resource">Next resource</h3>
+<p>When you are done with the first management group you just repeat the same procedure again (hint, use copy paste and modify some fields). The name for the bicep <em>resource</em>, and the tags <code>name</code>, <code>displayname</code> and <code>id</code> are the values you need to change for each management group resource you define. All the <code>id</code> tags for the <code>parent</code> property is now referencing slightly different. Instead of using the <code>managementGroup().id</code> function, you reference the object <code>id</code> property of the parent management group you want the resource to child of with dot-referencing the <code>id</code> property of the parent object; <code>id: MyOrgName.id</code>. For a child of the <strong>&lsquo;Platform&rsquo;</strong> management group the reference would be <code>id:Platform.id</code> instead. It&rsquo;s as easy as that!</p>
+<h2 id="deploying-the-management-groups">Deploying the management groups</h2>
+<p>When your file is completed and free of errors you can deploy it with PowerShell or Azure cli, I prefer PowerShell so that&rsquo;s what this guide will use.</p>
+<h2 id="find-the-tenant-id">Find the Tenant ID</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">Connect-AzAccount
+$Tenant = Get-AzTenant
+$ManagementGroup = Get-AzManagementGroup $Tenant.TenantId
+</code></pre></div><p>You can now check the details for your top level Management Group stored in the <em>$Managementgroup</em> variable.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">$ManagementGroup
+
+Id                <span style="color:#960050;background-color:#1e0010">:</span> /providers/Microsoft.Management/managementGroups/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Type              <span style="color:#960050;background-color:#1e0010">:</span> /providers/Microsoft.Management/managementGroups
+Name              <span style="color:#960050;background-color:#1e0010">:</span> xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+TenantId          <span style="color:#960050;background-color:#1e0010">:</span> xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+DisplayName       <span style="color:#960050;background-color:#1e0010">:</span> Tenant Root Group
+UpdatedTime       <span style="color:#960050;background-color:#1e0010">:</span> 2021-12-28 17<span style="color:#960050;background-color:#1e0010">:</span>31<span style="color:#960050;background-color:#1e0010">:</span>33
+UpdatedBy         <span style="color:#960050;background-color:#1e0010">:</span>
+ParentId          <span style="color:#960050;background-color:#1e0010">:</span>
+ParentName        <span style="color:#960050;background-color:#1e0010">:</span>
+ParentDisplayName <span style="color:#960050;background-color:#1e0010">:</span>
+</code></pre></div><h2 id="deploying">Deploying</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">New-AzManagementGroupDeployment -ManagementGroupId $ManagementGroup.Id -Templatefile <span style="color:#e6db74">&#34;.\main.bicep&#34;</span> -Name <span style="color:#e6db74">&#39;MananagementGroupsDeployment&#39;</span> -Location <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+</code></pre></div><p>Please note that for <em>Location</em> you can use your location of preference.</p>
+<h1 id="move-the-existing-subscription-into-a-management-group">Move the existing subscription into a management group</h1>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Register and setup a free Azure Account</title>
+            <link>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</link>
+            <pubDate>Mon, 10 Jan 2022 21:03:06 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/registerfreeazureaccount/</guid>
+            <description>Register a Microsoft account If you don&amp;rsquo;t have a Microsoft account or simply want a separate account for learning, go to https://outlook.live.com/ to register a new account.
+  Install Microsoft Authenticator on your mobile device https://www.microsoft.com/en-us/security/mobile-authenticator-app
+  Sign in to your Microsoft account. Click the account icon in the top right corner of outlook and enter the profile settings for your account. Then choose Security from the menu in the top of the page.</description>
+            <content type="html"><![CDATA[<ol>
+<li>
+<p>Register a Microsoft account
+If you don&rsquo;t have a Microsoft account or simply want a separate account for learning, go to <a href="https://outlook.live.com/">https://outlook.live.com/</a> to register a new account.</p>
+</li>
+<li>
+<p>Install Microsoft Authenticator on your mobile device <a href="https://www.microsoft.com/en-us/security/mobile-authenticator-app">https://www.microsoft.com/en-us/security/mobile-authenticator-app</a></p>
+</li>
+<li>
+<p>Sign in to your Microsoft account. Click the account icon in the top right corner of outlook and enter the profile settings for your account. Then choose Security from the menu in the top of the page. Click <em>Add a new way to sign in or verify</em> and then select <em>Use An App</em>. Open Microsoft Authenticator and follow the steps to add this as authentication for your account.</p>
+</li>
+<li>
+<p>Go to <a href="https://azure.microsoft.com/">https://azure.microsoft.com/</a> and click the <em>Free Account</em> button. Register the new Azure account with your Microsoft account. Microsoft requires a credit card to verify your identity, no money is drawn from the card, the card details are just validated. Once you have completed the registration process your Azure Account is ready for use.</p>
+</li>
+</ol>
+<h1 id="managing-access">Managing access</h1>
+<h3 id="the-global-administrator-role">The Global Administrator role</h3>
+<p>The new Azure Active Directory tenant that has been created for you only has one user account to start with, the user account you used to signed up for Azure. This account has the Azure AD <em>Global Administrator</em> role, this role gives the user the privileges to manage identities and role assignments in Azure Active Directory, but by default no privileges are granted to anything else in Azure like <em>management groups</em>, <em>subscriptions</em>, <em>Resource groups</em> or any type of resources.</p>
+<h3 id="separation-of-duties">Separation of duties</h3>
+<p>Normally you would delegate the different roles to users with the responsibility to manage pieces of your Azure account, in order to separate duties and reduce the impact if a privileged identity gets compromised.</p>
+<p>There are roles to administer the <strong>identity</strong> aspects of Azure (Azure Active Directory), like <em>User administrator</em>, these would be delegated to a helpdesk or access management team in a traditional It organization. These roles does not have any privileged access to the Azure resources in the account.</p>
+<p>There are also Azure roles like <em>User Access Administrator</em> or <em>Owner</em> that have <strong>access to resources</strong> in the account, like Management Groups, Subscriptions, and all subordinate scopes. These roles has no privileged acces in Azure Active Directory. These roles can be used to delegate access control to Management groups, Subscriptions, Resource Groups or any Azure resources such as Virtual Machines, Storage, Networks, Containers, Functions or Apps, typically delegated down to your development teams.</p>
+<p>The <em>Global Administrator</em> role is very powerful and can gain access to all other roles in your account by elevating access, this account must be well protected and should only be used for the very few tasks that require this role.</p>
+<h1 id="elevate-your-account">Elevate your account</h1>
+<p>You can elevate your <em>Global administrator</em> to give it access to the resources in Azure. Open <a href="https://aad.portal.azure.com/">Azure Active Directory Admin Center</a> and follow the instructions in <a href="https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin">https://docs.microsoft.com/en-us/azure/role-based-access-control/elevate-access-global-admin</a>. (While you are at it, you can also set your custom name for your tenant) Basically you will elevate your user account to <em>User Access Administrator</em> in the root of the tenant in order to later assign roles to other users Management Group structure.</p>
+<h3 id="enable-management-groups">Enable Management Groups</h3>
+<p>In the portal, write &ldquo;Management Groups&rdquo;, to get to the Management Groups blade. Azure will ask if you want to start using management groups, and yes, that is exactly what you want. Enable management groups and then click the <em>Tenant root group</em>. 
+<img src="tenantrootgroup.png" alt="tenantrootgroup.png">
+Next you select <em>Access control (IAM)</em> and then <em>Add</em>, <em>Add role assignment</em>. <img src="rbac.png" alt="rbac.png">
+Select the <em>Owner</em> role and then <em>Members</em>, now you can add the users that you want to have the <em>Owner</em> role for the <em>Tenant root group</em>, please be aware that they will have the owner privileges to everything in your Azure account, except Azure Active Directory. It&rsquo;s recommended to give this privilege only to the individuals that manages the management group structure and high level compliance like role and policy definitions. Then they can delegate the owner role on any scope under this one. Remember to follow the rule of least privilege access.</p>
+<p>To provide a user Owner privileges to the root of the tenant you can use Powershell.</p>
+<h4 id="i-recommend-the-powershell-method-over-using-the-azure-portal-especially-if-you-need-to-deploy-management-groups-in-the-tenant-root-group-with-powershell-i-have-experienced-issues-with-trying-to-do-it-with-the-portal">I recommend the PowerShell method over using the Azure Portal, especially if you need to deploy Management Groups in the Tenant Root Group with PowerShell (I have experienced issues with trying to do it with the portal).</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell">New-AzRoleAssignment -Scope <span style="color:#e6db74">&#39;/&#39;</span> -RoleDefinitionName <span style="color:#e6db74">&#39;Owner&#39;</span> -SignInName <span style="color:#e6db74">&#39;usersigninname@thetenantname.onmicrosoft.com&#39;</span>
+</code></pre></div><p>Remember to use the sign-in name you find for the user in the Azure Active Directory blade, since the sign-in name may differ if the user is created in another tenant from start.</p>
+<p>For the purpose of learning and labs you can give all access to your single user, allthough that is not recommended for any production scenarios.</p>
+<p>Once you have assigned the <em>Owner</em> role, you should go back to the Active Directory blade and disable the &ldquo;Access Management for Azure Resources&rdquo; to remove your account from the <em>User Access Administrator</em> role again. If you selected the same account as an Owner of the <em>Tenant root group</em>, you will still be able to manage resources in the account. If you selected another user, you will have to do any future steps in that user context instead.</p>
+<p>You&rsquo;ll notice that Azure has created a single subscription that is now in the &ldquo;Tenant root group*, we can move this subscription into a management group later on, when the management group structure is deployed.</p>
+<p><strong>That&rsquo;s it! You now have an Azure account to start getting some hands-on training!</strong></p>
+<p>Next we will <a href="/blog/posts/managementgroups/">create a management group structure</a> as base of your Azure foundation!</p>
+<p><strong>Stay tuned!</strong></p>
+<p>/TheAutomationDude</p>
+]]></content>
+        </item>
         
         <item>
             <title>VSCode productivity features and keyboard shortcuts</title>
