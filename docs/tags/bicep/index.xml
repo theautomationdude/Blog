@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Mon, 10 Jan 2022 21:46:54 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 11 Jan 2022 22:05:32 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure Management Groups, as Code</title>
       <link>https://theautomationdude.github.io/blog/posts/managementgroups/</link>
-      <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+      <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/posts/managementgroups/</guid>
       <description>This guide will give you an introduction to use Management Groups in Azure and how to create them as code. If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.

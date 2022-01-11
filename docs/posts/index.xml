@@ -6,13 +6,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Mon, 10 Jan 2022 21:46:54 +0100</lastBuildDate>
+        <lastBuildDate>Tue, 11 Jan 2022 22:05:32 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
         
         <item>
             <title>Azure Management Groups, as Code</title>
             <link>https://theautomationdude.github.io/blog/posts/managementgroups/</link>
-            <pubDate>Mon, 10 Jan 2022 21:46:54 +0100</pubDate>
+            <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
             
             <guid>https://theautomationdude.github.io/blog/posts/managementgroups/</guid>
             <description>This guide will give you an introduction to use Management Groups in Azure and how to create them as code. If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.
@@ -158,7 +158,7 @@ New-AzTenantDeployment @Params
 </code></pre></div><p>Notice that the parameters defined in the Bicep file was passed in the <em>TemplateParameterObject</em> parameter as a hashtable, to be consumed in the <em>Name</em> key in the Bicepfile.</p>
 <p>For this use-case, deploying the Bicep feels like taking the long route, but getting used to working with Bicep is very useful for a lot of other use-cases.</p>
 <h1 id="conclusion">Conclusion</h1>
-<p>Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. <strong>If you are interrested in a post about those scenarios, you can contact me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedId</a>.</strong></p>
+<p>Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. <strong>If you are interrested in a post about those scenarios, you can contact me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedIn</a>.</strong></p>
 ]]></content>
         </item>
         

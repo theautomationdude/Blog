@@ -2,7 +2,7 @@
 
 title: "Azure Management Groups, as Code" 
 
-date: 2022-01-10T21:46:54+01:00 
+date: 2022-01-11T22:05:32+01:00 
 
 draft: false
 
@@ -176,5 +176,5 @@ Notice that the parameters defined in the Bicep file was passed in the *Template
 For this use-case, deploying the Bicep feels like taking the long route, but getting used to working with Bicep is very useful for a lot of other use-cases.
 
 # Conclusion
-Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. **If you are interrested in a post about those scenarios, you can contact me on [LinkedId](https://www.linkedin.com/in/peter-the-automator/).**
+Now you know how to deploy a management groups as code! By using the techniques above you can efficiently and repeatedly create management group structures and with a few lines of extra code you can also quickly move sets of subscriptions into the managementgroups. **If you are interrested in a post about those scenarios, you can contact me on [LinkedIn](https://www.linkedin.com/in/peter-the-automator/).**
 
