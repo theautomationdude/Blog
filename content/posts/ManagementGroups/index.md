@@ -155,7 +155,7 @@ New-AzManagementGroupSubscription -GroupId 'Corp' -SubscriptionId '12345678-1234
 # Moving the subscription with Bicep
 You can also move the subscription by deploying an ARM or Bicep template file. This example uses Bicep, and I recommend Bicep over ARM except for the few cases where there is some Bicep limitation leaving you without a choice. Microsoft is still developing Bicep, but it already has a great coverage in Azure.
 
-**Download this [Bicep File](movesubscription.bicep)**, then deploy the template with Azure PowerShell.
+**Download this [Bicep File](MoveSubscription.bicep)**, then deploy the template with Azure PowerShell.
 ```Powershell
 #Splatting parameters to make it more readable
 $Params = @{

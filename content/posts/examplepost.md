@@ -8,20 +8,6 @@ tags:
   - untagged
 ---
 
-## - Getting started with Azure Powershell - Part 1
-- Install Powershell 7.2
-- Install Powershell AZ module
-# VSCode
-- Install VSCode
-- Install Extensions (Powershell, Bicep, Arm, Config brackets etc.)
-
-# Git
-- Create and clone your first repo
-- Link to Git introduction
-# VSCode 2
-VSCode keyboard shortcuts
-https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
-
 # Community ideas
 - I really notice how my contribution to the community is having effect (inspired by Mike Pfeifers "call to arms"). Students and engineers of different seniority are starting to follow me, sharing my posts etc. This stuff is really working and has great potential.
 - How can we make the /Cloudskills / Cloud Career builders community reach people that haven't yet chosen a career? I challenge the whole community (and Mike, I'm turning up the difficulty a bit here, hope you are up for it) to bring forward ideas.
@@ -37,6 +23,8 @@ https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf
 - OhMyPosh
 - Configuring the Windows Terminal
 - Connect to Azure, test Get-AzSubscription
+
+## Create your first subscription with Bicep and PowerShell
 
 # Azure Bastion (SSH/RDP)
 
