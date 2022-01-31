@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="">
+<meta name="description" content="An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network." />
+<meta name="keywords" content=", Azure, Bicep, PowerShell, EnterpriseScale, IaC" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BYK6B4BVVJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BYK6B4BVVJ');
+</script>
+<link rel="canonical" href="https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/" />
+
+
+    <title>
+        
+            Deploying Azure Subscriptions, as Code :: theAutomationDude  — A blog about cloud and devops
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/blog/main.17863a81d979b637a02cd7632a4d86e9d80563ef460fd6af1a56962efcaa066b.css">
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/blog/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/blog/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/blog/favicon-16x16.png">
+    <link rel="manifest" href="/blog/site.webmanifest">
+    <link rel="mask-icon" href="/blog/safari-pinned-tab.svg" color="">
+    <link rel="shortcut icon" href="/blog/favicon.ico">
+    <meta name="msapplication-TileColor" content="">
+    <meta name="theme-color" content="">
+
+
+
+<meta itemprop="name" content="Deploying Azure Subscriptions, as Code">
+<meta itemprop="description" content="An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network."><meta itemprop="datePublished" content="2022-01-29T15:09:14+01:00" />
+<meta itemprop="dateModified" content="2022-01-29T15:09:14+01:00" />
+<meta itemprop="wordCount" content="1945"><meta itemprop="image" content="https://theautomationdude.github.io/blog"/>
+<meta itemprop="keywords" content="Azure,Bicep,PowerShell,EnterpriseScale,IaC," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://theautomationdude.github.io/blog"/>
+
+<meta name="twitter:title" content="Deploying Azure Subscriptions, as Code"/>
+<meta name="twitter:description" content="An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network."/>
+
+
+
+
+    <meta property="og:title" content="Deploying Azure Subscriptions, as Code" />
+<meta property="og:description" content="An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/" /><meta property="og:image" content="https://theautomationdude.github.io/blog"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-29T15:09:14+01:00" />
+<meta property="article:modified_time" content="2022-01-29T15:09:14+01:00" /><meta property="og:site_name" content="theAutomationDude" />
+
+
+
+
+
+
+
+    <meta property="article:published_time" content="2022-01-29 15:09:14 &#43;0100 CET" />
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    
+        <body>
+    
+    
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://theautomationdude.github.io/blog" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">https://theautomationdude.github.io/blog</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/blog/about">About</a></li><li><a href="/blog/posts">Blog</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+  <main class="post">
+
+    <div class="post-info">
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        10 minutes
+
+        
+      </p>
+    </div>
+
+    <article>
+      <h1 class="post-title">
+        <a href="https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/">Deploying Azure Subscriptions, as Code</a>
+      </h1>
+
+      
+
+      
+
+      
+
+      <div class="post-content">
+        <p><img src="subscriptionalias.png" alt="subscriptionalias.png"></p>
+<p>An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network.</p>
+<h2 id="automation-and-self-service">Automation and self-service</h2>
+<p>When deploying subscriptions on a regular basis, it makes sense to provide self service capabilities and automate all the steps from requesting a new subscription to deploying the subscription, adding it to a management group, assigning blueprints, policies and other governance artifacts and tie the subscription to the internal billing.</p>
+<p>You may also have a structure in place where you provide each team with more than one subscription to separate their production, development and test workloads.</p>
+<p>In order to automate this process you need to deploy the subscriptions as code, instead of creating them through the Azure Portal. This blogpost will give you some hands on training on one of several possible ways to do these deployments.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>If you want to try this out yourself as a lab, you must first ensure that you have the pre-requisites ready.</p>
+<h5 id="this-guide-depends-on-the-following">This guide depends on the following:</h5>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bicep Cli</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install">Bicep Cli install instructions</a></td>
+</tr>
+<tr>
+<td>VSCode + Bicep Extension</td>
+<td><a href="/blog/posts/gettingupandreadywithvscode/">Getting Up And Ready With VSCode</a> and <a href="/blog/posts/vscodeproductivity/">VSCode Productivity hints</a></td>
+</tr>
+<tr>
+<td>Azure Powershell</td>
+<td><a href="/blog/posts/setupazpowershell/">Setup Azure Powershell </a></td>
+</tr>
+<tr>
+<td>Azure Account</td>
+<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+</tr>
+<tr>
+<td>User account with sufficient privileges to create Management Groups in the Tenant Root group</td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account</a> (<em>See the &ldquo;Enable Management Groups&rdquo; section</em>)</td>
+</tr>
+<tr>
+<td>Management Groups (optional, you can create management groups manually if you want to)</td>
+<td><a href="/blog/posts/managementgroups/">Deploy ManagementGroups As Code </a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="azure-billing">Azure Billing</h2>
+<p>All subscriptions are tied to billingaccounts, billingscopes and an invoicesections. The Invoicesection is subordinate to a billingscope and the billingscope is subordinate to the billingaccount. More than one subscription can be tied to a single invoicesection. In my lab environent there is just one invoicesection, one billingscope and one billingaccount, tied to one payment method, which is a payment card.</p>
+<p><img src="mca-billing-hierarchy.png" alt="Billing hierarchy"></p>
+<p>You can read about billing at <a href="https://docs.microsoft.com/en-us/azure/cost-management-billing/understand/mca-overview#understand-invoice-sections">Microsoft Docs</a></p>
+<h1 id="get-the-billingscope">Get the BillingScope</h1>
+<p>To create new subscriptions you need to get the billingscope you want to use for them, in the Azure portal it&rsquo;s a fairly straight-forward process where you just select the billing account, billingscope and invoicesection. When you deliver subscriptions as code, it&rsquo;s actually a bit more tediuos process. It&rsquo;s basically three steps, get the billingaccount, billingprofile and invoicesection, and the id property of the invoice section is the billingscope.</p>
+<h3 id="get-the-billing-account-name">Get the Billing Account Name</h3>
+<p>Since I&rsquo;m running this lab on a trial subscription for demo purposes, there is just one single billing account.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingAccountName = (Get-AzBillingAccount).Name
+</code></pre></div><h4 id="alternative-get-the-billingaccount-name-using-filters">Alternative: Get the BillingAccount name, using filters</h4>
+<p>If you have more billing accounts you might need to use the PowerShell <em>Where-Object</em> cmdlet to filter out the billing account you want to use. You do this by sending the result of the Get-AzBillingAccount through the pipeline <strong>|</strong> to <em>Where-Object</em> and then you compare the DisplayName property with the name you have for your BillingScope.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingAccountName = (Get-AzBillingAccount | Where-Object {$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;Your billing Account Display Name&#39;</span>}).Name
+</code></pre></div><p>Notice that we use <em>$_</em> for the object name, this means that when Where-Object loops through a list of all BillingAccounts that are returned from <em>Get-AzBillingAccount</em>, then the <em>$_</em> variable will contain the current item being iterated in the loop. <em>$_.DisplayName</em> will then contain the displayname property of the current item in the loop. This is then compared to whatever displayname you enter after the <em>-eq</em> comparisor.</p>
+<h3 id="get-the-billingprofile">Get the BillingProfile</h3>
+<p>To get the BillingProfile you must use <em>Get-AzBillingProfile</em> cmdlet, this requires the BillingAccount Name you stored in the $BillingAccountName variable, in the previous command.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingProfileName = (Get-AzBillingProfile -BillingAccountName $BillingAccountName).Name
+</code></pre></div><h3 id="get-the-billingscope-1">Get the BillingScope</h3>
+<p>Now to finally get the whole billingScopeId you need to use <em>Get-AzInvoiceSection</em>, the Id of the InvoiceSection is the BillingScope. This cmdlet will need the BillingAccount Name that you stored in the <em>$BillingAccountName</em> variable. The cmdlet will also need to know the BillingProfile Name (Id).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingScope = (Get-AzInvoiceSection -BillingProfileName $BillingProfileName -BillingAccountName $BillingAccountName).Id
+</code></pre></div><h4 id="alternative-get-billingprofile-and-billingscope-single-line-advanced">Alternative: Get BillingProfile and BillingScope, single line (advanced)</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingScope = (Get-AzInvoiceSection -BillingProfileName ((Get-AzBillingProfile -BillingAccountName $BillingAccountName).Name) -BillingAccountName $BillingAccountName).Id
+</code></pre></div><p>Again, I only have a single BillingProfile and a single InvoiceSection in my lab environment, making things pretty easy. For users with more than one Billing Profile or InvoiceSection, filters has to be used to get the right Billing Scope Id.</p>
+<h4 id="alternative-get-billingprofile-and-billingscope-using-filters">Alternative: Get Billingprofile and BillingScope using filters</h4>
+<p>Just like in the first step, you can use the <em>Where-Object</em> cmdlet to filter out the BillingProfile and the InvoiceSection you want to use. I find it pretty suitable to filter the DisplayName property for these objects, just like with the billing account.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingProfileName = (Get-AzBillingProfile -BillingAccountName $BillingAccountName | Where-Object {$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;Your Billing Profile Display Name&#39;</span>}).Name
+
+$BillingScope = (Get-AzInvoiceSection -BillingProfileName $BillingProfileName -BillingAccountName $BillingAccountName | Where-Object {$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;Your Invoice Section Display Name&#39;</span>}).Id
+</code></pre></div><h4 id="alternative-get-billingprofile-and-billingscope-using-filters-single-line-advanced">Alternative: Get Billingprofile and BillingScope using filters, single line (advanced)</h4>
+<p>Here both steps with filters are smashed into a single (long) line. I don&rsquo;t reccommend this approach as it&rsquo;s pretty hard to follow and debug.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$BillingScope = (Get-AzInvoiceSection -BillingProfileName ((Get-AzBillingProfile -BillingAccountName $BillingAccountName | Where-Object {$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;Your Billing Profile Display Name&#39;</span>}).Name) -BillingAccountName $BillingAccountName | Where-Object {$_.DisplayName <span style="color:#f92672">-eq</span> <span style="color:#e6db74">&#39;Your Invoice Section Display Name&#39;</span>}).Id
+</code></pre></div><p>Now you could take it one step further and get the BillingAccount Name in the same line, using filters and all, but I won&rsquo;t even bother since I totally recommend anyone to make their code readable and easy to debug. It&rsquo;s most likely you that will sit there and curse at your past self when reading a piece of code you wrote a year earlier.</p>
+<h1 id="building-a-subscriptions-array">Building a subscriptions array</h1>
+<p>If you want to deploy several subscriptions at a single time, you can build an array of subscriptions to deploy. I&rsquo;d probably use some kind of database or other data-source that the deployment process will read from, and trigger deployment functions that will carry out different parts of the deployment. I think its a good idea to separate the data from the code, but it&rsquo;s up to you really. In the <a href="main.bicep">bicep file</a> I have remarked a section where I have made the same subscriptions array as Bicep code. It&rsquo;s another way of doing it, where you will be saving the subscription name and workload values with the source code of your bicep, instead of separating it to another datasource. It doesn&rsquo;t give you the same opportunities for integration with some sort of self-service process, but it&rsquo;s very simple.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$Subscriptions = @()
+
+$Subscriptions += @{
+    Name = <span style="color:#e6db74">&#39;Prod Subscription 1&#39;</span>
+    Workload = <span style="color:#e6db74">&#39;Production&#39;</span>
+}
+
+$Subscriptions += @{
+    Name = <span style="color:#e6db74">&#39;Prod Subscription 2&#39;</span>
+    Workload = <span style="color:#e6db74">&#39;Production&#39;</span>
+}
+</code></pre></div><h1 id="build-a-parameters-object">Build a Parameters Object</h1>
+<p>Now you add the $Subscriptions array and the $Billingscope variable to the $Parameters hashtable. These will be sent as input parameters to bicep when deploying the bicep file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$Parameters = @{subscriptions = $Subscriptions; billingScope = $BillingScope}
+</code></pre></div><h1 id="the-bicep-file">The Bicep file</h1>
+<p>The reason I like to deploy using template deployments (Bicep or ARM) is that if you would use PowerShell cmdlets and loops to deploy each resource, it would call the Azure ARM Api once for every resource instead of just calling the Api once to deliver the deployment template. Once a deployment has been submitted to Azure, the deployment will be carried out by Azure Resource manager independently of your PowerShell session. You&rsquo;ll notice that this is way more efficient when deploying lot&rsquo;s of resources in a single deployment.</p>
+<p>Make sure to download the <a href="main.bicep">main.bicep</a> and if you want to you can also download a file with all the powershell commands <a href="subscriptionsdeploy.ps1">subscriptionsdeploy.ps1</a>. It&rsquo;s a good idea to write your own bicep file and use the downloaded as reference, just to learn the syntax and the logic of the bicep files. Remember that <code>Ctrl+Space</code> will give you intellisense syntax help.</p>
+<h5 id="targetscope">targetScope</h5>
+<p>We are deploying this template to a managementGroup, the targetScope must match the scope we deploy to.</p>
+<h5 id="decorator">@<em>decorator</em></h5>
+<p>This decorator is for the billingScope parameter, this decorator provides a description for the parameter. There are other decorators available like &ldquo;allowed(values)&rdquo;, you can see what&rsquo;s available if you just type the <em>@</em> sign in the row above the parameter declaration, VSCode will bring up the Bicep intellisense.</p>
+<h5 id="param-billingscope-string">param billingScope string</h5>
+<p>This is a parameter, we will supply the billingScope we retrieved previously to this parameter when running the deployment command.</p>
+<h5 id="param-subscriptions-array">param Subscriptions array</h5>
+<p>We will supply the array of subscriptions we created with PowerShell to this parameter when we run the deployment command.</p>
+<h5 id="heading">/*</h5>
+<p>Remarked section (starting with /* and ending with */), this is just to show how you can build the array in the bicep file instead of using a parameter.</p>
+<h5 id="resouce-subscriptionaliases">resouce subscriptionAliases</h5>
+<p>This is the resource that will create the subscription, the type is called <em>alias</em>. This is the resource that will automate the subscription creation process.</p>
+<p>I have created a for loop here that will take all the subscription objects in our array and create one subscription alias for each of these. In each iteration the current object in the Subscriptions array will be accessible in the object <em>sub</em>.</p>
+<h5 id="scope">Scope:</h5>
+<p>This bicep template is using a &ldquo;scope escape&rdquo; for this resource in order to create a tenant scope resource (subscription aliases) while being invoked as a management group deployment. The actual subscription will be deployed in a management group.</p>
+<h5 id="name">Name:</h5>
+<p>The name of the alias is not the name of the subscription, the alias is more like a deployment job that creates the subscription. I&rsquo;ve chosen to generate a guid from the displayname I have chosen for the subscription (sub.name).</p>
+<h5 id="billingscope">billingScope:</h5>
+<p>Here we just consume the billingScope parameter defined earlier.</p>
+<h5 id="displayname">displayName:</h5>
+<p>This will be the displayName of the actual subscription, for each subscription we will use the sub.name object as the deployment loops through the array.</p>
+<h5 id="additionalpropertiesmanagementgroupid">additionalProperties{managementGroupId:}</h5>
+<p>This is the managementGroup the subscription will be deployed to. We use the same managementgroup that we have chosen to do this bicep deployment to, by using the <em>managementGroup()</em> function in bicep to get the id.</p>
+<h5 id="workload">workload</h5>
+<p>There are different workloads available like &lsquo;Production&rsquo; and &lsquo;Devtest&rsquo;, the <em>sub.workload</em> value, from the array we defined, is being used to set the subscription workload.</p>
+<h5 id="output">output</h5>
+<p>Again we use a for loop to iterate through the subscriptions, but here we have added the counter <em>i</em>. In each iteration the <em>i</em> will increase and we will use it to get the object with that index in the array. This gives us the subscription details like subscriptionId&rsquo;s in the output from the deployment. In an automated process you may want to update the datasource with these.</p>
+<h1 id="deploy-the-subscriptions">Deploy the Subscriptions</h1>
+<p>Finally, we are ready to deploy this!</p>
+<p>First, if your PowerShell session connection to Azure has expired, you may need to re-authenticate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
+</code></pre></div><p>Now you can go ahead with deployment.</p>
+<p>Note that I have chosen to deploy my subscriptions to the managementgroup &lsquo;Corp&rsquo; that was created in the last <a href="/blog/posts/ManagementGroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
+$Params = @{
+    ManagementGroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>
+    Templatefile = <span style="color:#e6db74">&#39;.\main.bicep&#39;</span>
+    TemplateParameterObject = $Parameters
+    Location = <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+    Name = <span style="color:#e6db74">&#34;Subdeploy_</span>$(Get-Date -Format <span style="color:#e6db74">&#34;MM-dd-yyyy_HH.mm&#34;</span>)<span style="color:#e6db74">&#34;</span>
+}
+
+<span style="color:#75715e">#Deploy the Subscriptions</span>
+New-AzManagementGroupDeployment @Params
+</code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>Now you know a way to deploy subscriptions as code. This technique can be one piece of the puzzle to automate your subscription deployment process.</p>
+<p><strong>Please follow me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedIn</a> and let me know if you like my blog.</strong></p>
+
+      </div>
+    </article>
+
+    <hr />
+
+    <div class="subscribe">
+      
+      
+    </div>
+
+    <div class="post-info">
+      
+    <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg>
+
+        <span class="tag"><a href="https://theautomationdude.github.io/blog/tags/azure/">Azure</a></span>
+        <span class="tag"><a href="https://theautomationdude.github.io/blog/tags/bicep/">Bicep</a></span>
+        <span class="tag"><a href="https://theautomationdude.github.io/blog/tags/powershell/">PowerShell</a></span>
+        <span class="tag"><a href="https://theautomationdude.github.io/blog/tags/enterprisescale/">EnterpriseScale</a></span>
+        <span class="tag"><a href="https://theautomationdude.github.io/blog/tags/iac/">IaC</a></span>
+        
+    </p>
+
+      
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        1945 Words
+      </p>
+
+      <p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        
+          2022-01-29 15:09
+        
+
+         
+          
+        
+      </p>
+    </div>
+      <hr />
+      <div class="sharing-buttons">
+        
+<a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on facebook">
+  <div class="resp-sharing-button resp-sharing-button--facebook resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://twitter.com/intent/tweet/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on twitter">
+  <div class="resp-sharing-button resp-sharing-button--twitter resp-sharing-button--small">
+      <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.tumblr.com/widgets/share/tool?posttype=link&amp;title=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;caption=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;canonicalUrl=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on tumblr">
+  <div class="resp-sharing-button resp-sharing-button--tumblr resp-sharing-button--small">
+    <div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.563 24c-5.093 0-7.031-3.756-7.031-6.411V9.747H5.116V6.648c3.63-1.313 4.512-4.596 4.71-6.469C9.84.051 9.941 0 9.999 0h3.517v6.114h4.801v3.633h-4.82v7.47c.016 1.001.375 2.371 2.207 2.371h.09c.631-.02 1.486-.205 1.936-.419l1.156 3.425c-.436.636-2.4 1.374-4.156 1.404h-.178l.011.002z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="mailto:?subject=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;body=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_self" rel="noopener" aria-label="" title="Share via email">
+  <div class="resp-sharing-button resp-sharing-button--email resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://pinterest.com/pin/create/button/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f&amp;media=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f;description=Deploying%20Azure%20Subscriptions%2c%20as%20Code" target="_blank" rel="noopener" aria-label="" title="Share on pinterest">
+  <div class="resp-sharing-button resp-sharing-button--pinterest resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.401.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.354-.629-2.758-1.379l-.749 2.848c-.269 1.045-1.004 2.352-1.498 3.146 1.123.345 2.306.535 3.55.535 6.607 0 11.985-5.365 11.985-11.987C23.97 5.39 18.592.026 11.985.026L12.017 0z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f&amp;title=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;summary=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;source=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on linkedin">
+  <div class="resp-sharing-button resp-sharing-button--linkedin resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://reddit.com/submit/?url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f&amp;resubmit=true&amp;title=Deploying%20Azure%20Subscriptions%2c%20as%20Code" target="_blank" rel="noopener" aria-label="" title="Share on reddit">
+  <div class="resp-sharing-button resp-sharing-button--reddit resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://www.xing.com/app/user?op=share;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f;title=Deploying%20Azure%20Subscriptions%2c%20as%20Code" target="_blank" rel="noopener" aria-label="" title="Share on xing">
+  <div class="resp-sharing-button resp-sharing-button--xing resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.188 0c-.517 0-.741.325-.927.66 0 0-7.455 13.224-7.702 13.657.015.024 4.919 9.023 4.919 9.023.17.308.436.66.967.66h3.454c.211 0 .375-.078.463-.22.089-.151.089-.346-.009-.536l-4.879-8.916c-.004-.006-.004-.016 0-.022L22.139.756c.095-.191.097-.387.006-.535C22.056.078 21.894 0 21.686 0h-3.498zM3.648 4.74c-.211 0-.385.074-.473.216-.09.149-.078.339.02.531l2.34 4.05c.004.01.004.016 0 .021L1.86 16.051c-.099.188-.093.381 0 .529.085.142.239.234.45.234h3.461c.518 0 .766-.348.945-.667l3.734-6.609-2.378-4.155c-.172-.315-.434-.659-.962-.659H3.648v.016z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="whatsapp://send?text=Deploying%20Azure%20Subscriptions%2c%20as%20Code%20https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on whatsapp">
+  <div class="resp-sharing-button resp-sharing-button--whatsapp resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f&amp;t=Deploying%20Azure%20Subscriptions%2c%20as%20Code" target="_blank" rel="noopener" aria-label="" title="Share on hacker news">
+  <div class="resp-sharing-button resp-sharing-button--hackernews resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M0 24V0h24v24H0zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896h-1.88z"/></svg>
+    </div>
+  </div>
+</a>
+
+
+<a class="resp-sharing-button__link" href="https://telegram.me/share/url?text=Deploying%20Azure%20Subscriptions%2c%20as%20Code&amp;url=https%3a%2f%2ftheautomationdude.github.io%2fblog%2fposts%2fdeployazsubscriptionsascode%2f" target="_blank" rel="noopener" aria-label="" title="Share on telegram">
+  <div class="resp-sharing-button resp-sharing-button--telegram resp-sharing-button--small"><div aria-hidden="true" class="resp-sharing-button__icon resp-sharing-button__icon--solid">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    </div>
+  </div>
+</a>
+
+      </div>
+
+    
+    <div class="pagination">
+        <div class="pagination__title">
+            <span class="pagination__title-h">Read other posts</span>
+            <hr />
+        </div>
+
+        <div class="pagination__buttons">
+            
+
+            
+            <span class="button next">
+                <a href="https://theautomationdude.github.io/blog/posts/managementgroups/">
+                    <span class="button__text">Azure Management Groups, as Code</span>
+                    <span class="button__icon">→</span>
+                </a>
+            </span>
+            
+        </div>
+    </div>
+
+
+    
+
+    
+
+  </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    
+    
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+<script type="text/javascript" src="/blog/bundle.min.599099f1f14b78b657d524b28e10e0c5098e7cd46e9c7aed73d577068a276c3ff1bb234cbf29cb313333e83cf411727b43157c91ce5b809e2ffc81664614608e.js" integrity="sha512-WZCZ8fFLeLZX1SSyjhDgxQmOfNRunHrtc9V3BoonbD/xuyNMvynLMTMz6Dz0EXJ7QxV8kc5bgJ4v/IFmRhRgjg=="></script>
+
+
+
+    </body>
+</html>

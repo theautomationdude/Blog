@@ -43,7 +43,7 @@ If you want to try this out yourself as a lab, you must first ensure that you ha
 |Azure Powershell | [Setup Azure Powershell ](/blog/posts/setupazpowershell/)|
 |Azure Account | [Register Free Azure Account ](/blog/posts/RegisterFreeAzureAccount/)|
 |User account with sufficient privileges to create Management Groups in the Tenant Root group | [Register Free Azure Account](/blog/posts/registerfreeazureaccount/) (*See the "Enable Management Groups" section*)|
-|Management Groups (optional, you can create management groups manually if you want to) | [Deploy ManagementGroups As Code ](/blog/posts/ManagementGroups/)|
+|Management Groups (optional, you can create management groups manually if you want to) | [Deploy ManagementGroups As Code ](/blog/posts/managementgroups/)|
 
 ## Azure Billing
 All subscriptions are tied to billingaccounts, billingscopes and an invoicesections. The Invoicesection is subordinate to a billingscope and the billingscope is subordinate to the billingaccount. More than one subscription can be tied to a single invoicesection. In my lab environent there is just one invoicesection, one billingscope and one billingaccount, tied to one payment method, which is a payment card.
@@ -60,6 +60,7 @@ Since I'm running this lab on a trial subscription for demo purposes, there is j
 ```PowerShell
 $BillingAccountName = (Get-AzBillingAccount).Name
 ```
+#### Alternative: Get the BillingAccount name, using filters
 If you have more billing accounts you might need to use the PowerShell *Where-Object* cmdlet to filter out the billing account you want to use. You do this by sending the result of the Get-AzBillingAccount through the pipeline **|** to *Where-Object* and then you compare the DisplayName property with the name you have for your BillingScope.
 
  ```PowerShell
@@ -74,21 +75,21 @@ To get the BillingProfile you must use *Get-AzBillingProfile* cmdlet, this requi
 $BillingProfileName = (Get-AzBillingProfile -BillingAccountName $BillingAccountName).Name
 ```
 
-### Get the billingScopeId from the Invoice Section
-Now to finally get the whole billingScopeId you need to use *Get-AzInvoiceSection*. This cmdlet will need the BillingAccount Name that you stored in the *$BillingAccountName* variable. The cmdlet will also need to know the BillingProfile Name (Id).
+### Get the BillingScope
+Now to finally get the whole billingScopeId you need to use *Get-AzInvoiceSection*, the Id of the InvoiceSection is the BillingScope. This cmdlet will need the BillingAccount Name that you stored in the *$BillingAccountName* variable. The cmdlet will also need to know the BillingProfile Name (Id).
 
 ```PowerShell
 $BillingScope = (Get-AzInvoiceSection -BillingProfileName $BillingProfileName -BillingAccountName $BillingAccountName).Id
 ```
 
-**Or**, combine the last two commands in a single line like this (**advanced users only**)
+#### Alternative: Get BillingProfile and BillingScope, single line (advanced)
 ```PowerShell
 $BillingScope = (Get-AzInvoiceSection -BillingProfileName ((Get-AzBillingProfile -BillingAccountName $BillingAccountName).Name) -BillingAccountName $BillingAccountName).Id
 ```
 
 Again, I only have a single BillingProfile and a single InvoiceSection in my lab environment, making things pretty easy. For users with more than one Billing Profile or InvoiceSection, filters has to be used to get the right Billing Scope Id.
 
-### The last two steps, using filters
+#### Alternative: Get Billingprofile and BillingScope using filters
 Just like in the first step, you can use the *Where-Object* cmdlet to filter out the BillingProfile and the InvoiceSection you want to use. I find it pretty suitable to filter the DisplayName property for these objects, just like with the billing account.
 
 ```PowerShell
@@ -96,7 +97,7 @@ $BillingProfileName = (Get-AzBillingProfile -BillingAccountName $BillingAccountN
 
 $BillingScope = (Get-AzInvoiceSection -BillingProfileName $BillingProfileName -BillingAccountName $BillingAccountName | Where-Object {$_.DisplayName -eq 'Your Invoice Section Display Name'}).Id
 ```
-### All in a single line, with filter (advanced users only)
+#### Alternative: Get Billingprofile and BillingScope using filters, single line (advanced)
  Here both steps with filters are smashed into a single (long) line. I don't reccommend this approach as it's pretty hard to follow and debug.
 
 ```PowerShell
@@ -105,7 +106,7 @@ $BillingScope = (Get-AzInvoiceSection -BillingProfileName ((Get-AzBillingProfile
 Now you could take it one step further and get the BillingAccount Name in the same line, using filters and all, but I won't even bother since I totally recommend anyone to make their code readable and easy to debug. It's most likely you that will sit there and curse at your past self when reading a piece of code you wrote a year earlier.
 
 # Building a subscriptions array
-If you want to deploy several subscriptions at a single time, you can build an array of subscriptions to deploy. I'd probably use some kind of database or other data-source that the deployment process will read from, and trigger deployment functions that will carry out different parts of the deployment. I think its a good idea to separate the data from the code, but it's up to you really. In the [bicep file](main.bicep) I have remarked a section where I have made the same subscriptions array in bicep. It's another way of doing it, where you will be saving the subscription name and workload values with the source code of your bicep, instead of separating it to another datasource. It doesn't give you the same opportunities for integration with some sort of self-service process, but it's very simple.
+If you want to deploy several subscriptions at a single time, you can build an array of subscriptions to deploy. I'd probably use some kind of database or other data-source that the deployment process will read from, and trigger deployment functions that will carry out different parts of the deployment. I think its a good idea to separate the data from the code, but it's up to you really. In the [bicep file](main.bicep) I have remarked a section where I have made the same subscriptions array as Bicep code. It's another way of doing it, where you will be saving the subscription name and workload values with the source code of your bicep, instead of separating it to another datasource. It doesn't give you the same opportunities for integration with some sort of self-service process, but it's very simple.
 
 ```PowerShell
 $Subscriptions = @()
@@ -128,6 +129,8 @@ $Parameters = @{subscriptions = $Subscriptions; billingScope = $BillingScope}
 ```
 
 # The Bicep file
+The reason I like to deploy using template deployments (Bicep or ARM) is that if you would use PowerShell cmdlets and loops to deploy each resource, it would call the Azure ARM Api once for every resource instead of just calling the Api once to deliver the deployment template. Once a deployment has been submitted to Azure, the deployment will be carried out by Azure Resource manager independently of your PowerShell session. You'll notice that this is way more efficient when deploying lot's of resources in a single deployment.
+
 Make sure to download the [main.bicep](main.bicep) and if you want to you can also download a file with all the powershell commands [subscriptionsdeploy.ps1](subscriptionsdeploy.ps1). It's a good idea to write your own bicep file and use the downloaded as reference, just to learn the syntax and the logic of the bicep files. Remember that `Ctrl+Space` will give you intellisense syntax help.
 
 ##### targetScope
@@ -163,10 +166,10 @@ Here we just consume the billingScope parameter defined earlier.
 This will be the displayName of the actual subscription, for each subscription we will use the sub.name object as the deployment loops through the array.
 
 ##### additionalProperties{managementGroupId:}
-This is the managementGroup the subscription will be deployed to. We use the same managementgroup that we have chosen to do this bicep deployment to, by using the managementGroup() funtion in bicep to get the id.
+This is the managementGroup the subscription will be deployed to. We use the same managementgroup that we have chosen to do this bicep deployment to, by using the *managementGroup()* function in bicep to get the id.
 
 ##### workload
-There are different workloads available like 'Production' and 'Devtest', I've chosen 'Production'.
+There are different workloads available like 'Production' and 'Devtest', the *sub.workload* value, from the array we defined, is being used to set the subscription workload.
 
 ##### output
 Again we use a for loop to iterate through the subscriptions, but here we have added the counter *i*. In each iteration the *i* will increase and we will use it to get the object with that index in the array. This gives us the subscription details like subscriptionId's in the output from the deployment. In an automated process you may want to update the datasource with these.

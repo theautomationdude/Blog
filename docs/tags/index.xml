@@ -7,11 +7,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 11 Jan 2022 22:05:32 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Jan 2022 15:09:14 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Azure</title>
       <link>https://theautomationdude.github.io/blog/tags/azure/</link>
-      <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/azure/</guid>
       <description></description>
@@ -20,7 +20,7 @@
     <item>
       <title>Bicep</title>
       <link>https://theautomationdude.github.io/blog/tags/bicep/</link>
-      <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/bicep/</guid>
       <description></description>
@@ -29,9 +29,27 @@
     <item>
       <title>EnterpriseScale</title>
       <link>https://theautomationdude.github.io/blog/tags/enterprisescale/</link>
-      <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/enterprisescale/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IaC</title>
+      <link>https://theautomationdude.github.io/blog/tags/iac/</link>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/iac/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PowerShell</title>
+      <link>https://theautomationdude.github.io/blog/tags/powershell/</link>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/tags/powershell/</guid>
       <description></description>
     </item>
     
@@ -41,15 +59,6 @@
       <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
       
       <guid>https://theautomationdude.github.io/blog/tags/microsoftcloudadoptionframework/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Powershell</title>
-      <link>https://theautomationdude.github.io/blog/tags/powershell/</link>
-      <pubDate>Tue, 11 Jan 2022 22:05:32 +0100</pubDate>
-      
-      <guid>https://theautomationdude.github.io/blog/tags/powershell/</guid>
       <description></description>
     </item>
     

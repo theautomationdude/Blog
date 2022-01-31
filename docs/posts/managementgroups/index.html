@@ -287,7 +287,7 @@ New-AzManagementGroupSubscription @Params
 New-AzManagementGroupSubscription -GroupId <span style="color:#e6db74">&#39;Corp&#39;</span> -SubscriptionId <span style="color:#e6db74">&#39;12345678-1234-1234-1234-123456789012&#39;</span>
 </code></pre></div><h1 id="moving-the-subscription-with-bicep">Moving the subscription with Bicep</h1>
 <p>You can also move the subscription by deploying an ARM or Bicep template file. This example uses Bicep, and I recommend Bicep over ARM except for the few cases where there is some Bicep limitation leaving you without a choice. Microsoft is still developing Bicep, but it already has a great coverage in Azure.</p>
-<p><strong>Download this <a href="movesubscription.bicep">Bicep File</a></strong>, then deploy the template with Azure PowerShell.</p>
+<p><strong>Download this <a href="MoveSubscription.bicep">Bicep File</a></strong>, then deploy the template with Azure PowerShell.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Powershell" data-lang="Powershell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
 $Params = @{
     Templatefile = <span style="color:#e6db74">&#39;.\MoveSubscription.bicep&#39;</span>
@@ -459,6 +459,13 @@ New-AzTenantDeployment @Params
         </div>
 
         <div class="pagination__buttons">
+            
+            <span class="button previous">
+                <a href="https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/">
+                    <span class="button__icon">←</span>
+                    <span class="button__text">Deploying Azure Subscriptions, as Code</span>
+                </a>
+            </span>
             
 
             

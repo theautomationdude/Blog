@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Tue, 11 Jan 2022 22:05:32 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/enterprisescale/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Jan 2022 15:09:14 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/enterprisescale/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploying Azure Subscriptions, as Code</title>
+      <link>https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/</link>
+      <pubDate>Sat, 29 Jan 2022 15:09:14 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/</guid>
+      <description>An Azure Subscription is a boundary in Azure for billing and also an access management boundary. Usually a subscription has one or more owners that will have control over spending and assigning access to resources and resource groups in that subscription. In large organisations there may be a lot of development teams sharing the same Azure tenant, but each team may have one or more subscriptions in the tenant. That will separate their workloads and billing while still allowing them to share the user identities, some hub networking and other services that may be accessed through a hub network.</description>
+    </item>
+    
     <item>
       <title>Azure Management Groups, as Code</title>
       <link>https://theautomationdude.github.io/blog/posts/managementgroups/</link>
