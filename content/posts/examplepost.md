@@ -24,8 +24,6 @@ tags:
 - Configuring the Windows Terminal
 - Connect to Azure, test Get-AzSubscription
 
-## Create your first subscription with Bicep and PowerShell
-
 # Azure Bastion (SSH/RDP)
 
 ## - Azure Policy
@@ -45,16 +43,3 @@ tags:
 4. Remediation policy - part 2
 - AuditIfNotExists Policy
 - DeployIfNotExists Policy
-
-
-
-```Powershell
-Get-Command
-```
-
-```shell
-cd ..
-```
-
-
-
