@@ -11,6 +11,7 @@ I'm an automation dude and IT professional with more than 20 years experience. t
 
 I got a background in traditional IT Infrastructure, architecture and security. The latter part of my career has centered around automation, cloud and devops. 
 
+Follow me on [LinkedIn](https://www.linkedin.com/in/peter-the-automator/)
 ## The Blog
 In this blog I'll share my thoughs related to just about anything cloud, code, devops and IT in general, basically anything that comes to mind. And I'll also share experiences, how-to guides and other good learning stuff depending on what I work with at the moment (and may still be learning myself) or have worked with in the past. I consider this profession to be a long learning journey that will never end, so feel free to contact me if you think there are better ways to do the stuff.
 
@@ -33,6 +34,3 @@ We had moved to larger house farther away from my work, had two more kids (twins
 I signed up for a new job as a senior engineer on a Windows Server team, leveraging my Powershell skills and hoping to get a foot into the clouds. I was meant to take lead on the webserver platform, when my "fluency" in Powershell was revealed, I was reassigne to take over runbook authoring and automation with SMA. I spent the next two years writing runbooks, consuming API's, providing internal Powershell training, introducing the team to Git and TFS/Azure DevOps, built some demos for [Powershell Unviversal](https://ironmansoftware.com/powershell-universal/), providing a front-end site for server automation in the on-premises datacenters and made some some API endpoints for the same use-cases. I also made some proof of concepts with Azure Automation instead of SMA, with on-prem hybrid workers and a CI/CD pipeline to sign and deploy the runbooks to Azure Automation. Automating in a large environment with technical debt and complex dependencies is a slow and cumbersome process, and doing all that stuff in a cloud was looking very attractive to me. 
 
 The work was still mainly about on-premises servers and I wanted to do all that stuff in the cloud, preferably Azure. I got news of a vacancy in the cloud adoption team, that I applied for and pretty quickly my request was granted. Before applying I didn't even know if my role would be for AWS or Azure, I reasoned that any of the two would be a step in the right direction. It turned out the role would initially be about Azure and that's where I am today. Hopefully I will be able to work across both clouds in the future.
-
-
-

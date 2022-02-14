@@ -1,35 +1,31 @@
-targetScope = 'managementGroup'
+targetScope = 'subscription'
 
-param AssignableScopes array
+@description('The role name')
+param roleName string = 'Custom Owner'
 
-@description('A new GUID used to identify the role definition')
-param roleName string
+var roleDefName = guid(subscription().id, roleName)
 
-resource ScaniaOwner 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' = {
-  name: roleName
+resource customOwner 'Microsoft.Authorization/roleDefinitions@2018-01-01-preview' = {
+  name: roleDefName
   properties: {
     description: 'Grants full access to manage all resources, except edit the subscription properties'
     type: 'CustomRole'
-    roleName: 'Scania Owner'
-    assignableScopes: AssignableScopes
+    roleName: roleName
+    assignableScopes: [
+      subscription().id
+    ]
     permissions: [
       {
         actions: [
           '*'
         ]
         notActions: [
-          'Microsoft.Subscription/cancel/action'
-          'Microsoft.Subscription/rename/action'
-          'Microsoft.Subscription/enable/action'
-          'Microsoft.Subscription/CreateSubscription/action'
-          'Microsoft.Subscription/updateTenant/action'
-          'Microsoft.Subscription/Subscriptions/write'
-          'Microsoft.Subscription/aliases/write'
-          'Microsoft.Subscription/aliases/read'
-          'Microsoft.Subscription/aliases/delete'
-          'Microsoft.Authorization/roleDefinitions/write'
-          'Microsoft.Authorization/roleDefinitions/delete'
+            'Microsoft.Subscription/cancel/action'
+            'Microsoft.Subscription/rename/action'
+            'Microsoft.Subscription/enable/action'
         ]
+        dataActions:[]
+        notDataActions:[]
       }
     ]
   }

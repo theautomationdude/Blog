@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 29 Jan 2022 15:09:14 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Feb 2022 10:10:45 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Roles</title>
+      <link>https://theautomationdude.github.io/blog/posts/azureroles/</link>
+      <pubDate>Sat, 12 Feb 2022 10:10:45 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/azureroles/</guid>
+      <description>In Azure, access and control of any resources is managed through Role based access control (RBAC). By being assinged a role, a user will be able to access or manage different aspects of a resource and it&amp;rsquo;s subordinate resources.
+This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli install instructions   VSCode + Bicep Extension Getting Up And Ready With VSCode and VSCode Productivity hints   Azure Powershell Setup Azure Powershell    Azure Account Register Free Azure Account     Scopes The roles will be given permissions on a Scope.</description>
+    </item>
+    
     <item>
       <title>Deploying Azure Subscriptions, as Code</title>
       <link>https://theautomationdude.github.io/blog/posts/deployazsubscriptionsascode/</link>

@@ -4,7 +4,7 @@ title: "Azure Policies, Part I"
 
 date: 2022-02-11T08:31:22+01:00 
 
-draft: false
+draft: true
 
 comments: true 
 

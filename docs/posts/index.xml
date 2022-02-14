@@ -6,8 +6,141 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 29 Jan 2022 15:09:14 +0100</lastBuildDate>
+        <lastBuildDate>Sat, 12 Feb 2022 10:10:45 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Azure Roles</title>
+            <link>https://theautomationdude.github.io/blog/posts/azureroles/</link>
+            <pubDate>Sat, 12 Feb 2022 10:10:45 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/azureroles/</guid>
+            <description>In Azure, access and control of any resources is managed through Role based access control (RBAC). By being assinged a role, a user will be able to access or manage different aspects of a resource and it&amp;rsquo;s subordinate resources.
+This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli install instructions   VSCode + Bicep Extension Getting Up And Ready With VSCode and VSCode Productivity hints   Azure Powershell Setup Azure Powershell    Azure Account Register Free Azure Account     Scopes The roles will be given permissions on a Scope.</description>
+            <content type="html"><![CDATA[<p><img src="roles.png" alt="roles.png"></p>
+<p>In Azure, access and control of any resources is managed through <em>Role based access control</em> (RBAC). By being assinged a role, a user will be able to access or manage different aspects of a resource and it&rsquo;s subordinate resources.</p>
+<h2 id="this-guide-depends-on-the-following">This guide depends on the following:</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bicep Cli</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install">Bicep Cli install instructions</a></td>
+</tr>
+<tr>
+<td>VSCode + Bicep Extension</td>
+<td><a href="/blog/posts/gettingupandreadywithvscode/">Getting Up And Ready With VSCode</a> and <a href="/blog/posts/vscodeproductivity/">VSCode Productivity hints</a></td>
+</tr>
+<tr>
+<td>Azure Powershell</td>
+<td><a href="/blog/posts/setupazpowershell/">Setup Azure Powershell </a></td>
+</tr>
+<tr>
+<td>Azure Account</td>
+<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+</tr>
+</tbody>
+</table>
+<h1 id="scopes">Scopes</h1>
+<p>The roles will be given permissions on a <em>Scope</em>. To determine what a user is authorized to do in a specific scope, Azure checks what roles assignments are made to the scope you are trying to access.</p>
+<p>Scopes can be anything from an entire tenant to a managementgroup, subscription, resourcegroup or resource, basically anything you can manage in Azure. These are referred to as the resource Id.</p>
+<p><img src="rbac-scope-no-label.png" alt="rbac-scope-no-label.png"></p>
+<p>Read more about scopes at <a href="https://docs.microsoft.com/en-us/azure/role-based-access-control/scope-overview#:~:text=In%20Azure%2C%20you%20can%20specify,of%20these%20levels%20of%20scope.">Microsoft Docs</a></p>
+<h1 id="role-assignments-and-role-definitions">Role Assignments and Role Definitions</h1>
+<p>Role assignments are the components that tells Azure what permissions a user (identity) has been granted to a scope.</p>
+<p><img src="roles.png" alt="roles.png"></p>
+<p>The Role assignment itself basically just links a <em>role definition</em> and a <em>principal</em> (identity) to a <em>resource scope</em>. The actual permissions are defined in the <em>role definition</em>. There can be many role assignments made for a single role definition.</p>
+<p>All role assignments and role definitions in a certain scope, can be listed by simply looking in the Azure portal under Access control (IAM), this applies to almost any type of object you can manage in the portal.</p>
+<p><img src="IAM.png" alt="IAM.png"></p>
+<ul>
+<li>
+<p>You can see all assignable role-<strong>assignments</strong> in a scope by clicking the <em>Role assignments</em> tab.</p>
+</li>
+<li>
+<p>You can see all assignable role-<strong>definitions</strong> in a scope by clicking the <em>Roles</em> tab in the <em>Access control (IAM)</em> page.</p>
+</li>
+</ul>
+<h1 id="role-assignments">Role assignments</h1>
+<p>Open a subscription in your Azure environment and open the <em>Access control (IAM)</em> page and the <em>Role Assignments</em> tab. Here all the role assignments made for this scope will be listed. You can see in the <em>Scope</em> column where the role that applies for this subscription was assigned. If you don&rsquo;t already have any assignments directly to this resource, try adding one by clicking the <em>+ Add</em> button to make a new role assignment. Select the <em>Owner</em> role, click next, click <em>+ Select members</em> and then add your own account, finish by clicking <em>Review + Assign</em>. When the assignments is ready you should see it in the list.</p>
+<h2 id="lets-check-the-properties-of-this-role-assignment">Let&rsquo;s check the properties of this role assignment!</h2>
+<p>The portal shows a subset of the properties of the role assignment, you can get more properties by using the Azure resource manager (ARM) API, the simplest way is by using either Azure Cli or PowerShell.</p>
+<p>To get all the role assignments for your subscription, use the PowerShell command below. The <em>Scope</em> should be a resource identifier, for a subscription it looks like this: <em>/subscriptions/00000000-0000-0000-0000-000000000000</em>.</p>
+<p><strong>Replace the zeroes with your subscription Id.</strong></p>
+<p><strong>PowerShell</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#List all role assignments in a given scope</span>
+Get-AzRoleAssignment -Scope <span style="color:#e6db74">&#39;/subscriptions/00000000-0000-0000-0000-000000000000&#39;</span>
+</code></pre></div><p>You can see that each role assignment has a bunch of properties and that it&rsquo;s identified with a unique RoleAssignmentId, note that the scope for the role assignment is a part of the RoleAssignmentId, this means that you can use the same roleassignment template for many different scopes.</p>
+<p>To get the JSON representation of the role assignment you can use the <em>ConvertTo-Json</em> cmdlet and you can then output it to a file.</p>
+<p><strong>PowerShell</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Get-AzRoleAssignment -ObjectId <span style="color:#e6db74">&#39;00000000-0000-0000-0000-0000000000&#39;</span> | ConvertTo-Json | Out-file -FilePath <span style="color:#e6db74">&#39;.\roleassignment.json&#39;</span>
+</code></pre></div><h2 id="making-a-role-assignment">Making a role assignment</h2>
+<p>You can make a new role assignment using Azure Cli or PowerShell cmdlet <em>New-AzRoleAssignment</em>. However you can also make an ARM or Bicep template to deploy the role assignment, to save it in your repository &ldquo;as code&rdquo;. I&rsquo;ve made an <a href="roleassignment.bicep">example</a> with <strong>Bicep</strong>.</p>
+<h4 id="name">name:</h4>
+<p>This is the name of the role assignment and must be a globally unique identifier (GUID). Best practice is to create a GUID using the scope, principal ID, and role ID together. You can use the bicep function <em>guid()</em> to generate a guid from the three values. If you plan to assign the role to a different scope that subscription, like a management group or resource group, you just replace the <em>subscription().id</em> with <em>managementGroup().id</em> or *resourceGroup.id() and change the <em>targetscope</em> accordingly.</p>
+<h4 id="properties">properties:</h4>
+<h5 id="principalid"><strong>principalId:</strong></h5>
+<p>This is the Id of the principal (user account or managed identity) that you want to give permissions to. Here represented by a parameter.</p>
+<h5 id="roledefinitionid"><strong>roleDefinitionId:</strong></h5>
+<p>This is the Id of the role definition you want to apply for this user, here represented by a parameter.</p>
+<h3 id="deploy-the-assignment">Deploy the Assignment</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$Parameters = @{principalId = <span style="color:#e6db74">&#39;00000000-0000-0000-0000-000000000000&#39;</span>; roleDefinitionResourceId = <span style="color:#e6db74">&#39;/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635&#39;</span>; }
+
+Set-AzContext -SubscriptionName <span style="color:#e6db74">&#39;Your Subscription displayname&#39;</span>
+
+New-AzSubscriptionDeployment -Name <span style="color:#e6db74">&#39;Deploy_roleassignment&#39;</span> -Location <span style="color:#e6db74">&#39;WestEurope&#39;</span> -TemplateFile <span style="color:#e6db74">&#39;roleassignment.bicep&#39;</span> -TemplateParameterObject $Parameters
+
+</code></pre></div><h1 id="role-definitions">Role Definitions</h1>
+<p>You can see all assignable role-definitions in a scope by clicking the &ldquo;Roles&rdquo; tab in the <em>Access control (IAM)</em> page. By clicking the (Details) &ldquo;View&rdquo; link on the right you can see the permissions of a role. If you then click the &ldquo;JSON&rdquo; tab, you will see the JSON representation of the role, this is basically what you will use when you make new role-definitions as code.</p>
+<p><strong>You can retrieve them with PowerShell, just like you did with the role assignments.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#List all role definitions in a given scope</span>
+Get-AzRoleDefinition -Scope <span style="color:#e6db74">&#39;/subscriptions/00000000-0000-0000-0000-000000000000&#39;</span>
+</code></pre></div><p>To get the role definition for a single role as JSON to a file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Get-AzRoleDefinition -Name <span style="color:#e6db74">&#39;owner&#39;</span> | ConvertTo-Json | Out-file -FilePath <span style="color:#e6db74">&#39;.\ownerdefinition.json&#39;</span>
+</code></pre></div><h2 id="lets-look-a-the-json-on-the-bult-in-owner-role">Let&rsquo;s look a the JSON on the bult-in &lsquo;owner&rsquo; role!</h2>
+<h4 id="name-1">Name:</h4>
+<p>The displayname for the role definition.</p>
+<h4 id="id">id:</h4>
+<p>This is the Unique Identifier for this role-definition. This id is used when doing a role-assignment.</p>
+<h4 id="properties-1">properties:</h4>
+<h5 id="rolename">roleName:</h5>
+<p>The displayname of this role, please note that it is not unique, that means that two different role-definitions with the same name can be defined in two different scopes.</p>
+<h5 id="description">description:</h5>
+<p>A freetext description field that should briefly and simplified describe what permissions this role gives.</p>
+<h5 id="assignablescopes">assignableScopes:</h5>
+<p>This is a list of all the scopes where this role definition can be assigned. Microsoft uses this property in to enable moving resouces between different scopes without having to make new role-definitions and assignments, in short - use the scope you are deploying the role definition to unless you are migrating things. This list is a JSON array, all scopes will be listed within the <em>[]</em>.</p>
+<h5 id="permissions">permissions:</h5>
+<p>In this key you will define the actual permissions that the role gives. Note that the permissions key is a JSON array [ ], with (theoretical) possibility to have more than one list of permissions. However I have never tried to pull off that stunt.</p>
+<p>Every key in a permissions item is another JSON array [ ], which means that you can make lists of <em>actions</em>, <em>notActions</em> etc.</p>
+<ul>
+<li><strong>actions</strong> lists all the actions that this role can make, for the <em>owner</em> role this is just the wildcard * for everything.</li>
+<li><strong>notActions</strong> lists every action that you explicitly want to deny from this role, by listing things here, you can take away some of the permissions that were listed in <em>actions</em>.</li>
+<li><strong>dataActions</strong> lists all the dataActions that this role can make, this controls what the role can do with the data inside a resource, for example access to the files in a storage account. In Azure the controlplane for resource objects is separated from the dataplane in the resources.</li>
+<li><strong>notDataActions</strong> lists every dataAction that you explicitly want to deny from this role, by listing things here, you can take away some of the permissions that were listed in <em>dataActions</em>.</li>
+</ul>
+<h1 id="custom-role-definitions">Custom Role definitions</h1>
+<p>There might be reasons you want to make your own custom roles to limit the amount of permissions you give away in your organisation. For example you may not want your application teams to be able to cancel, rename, or create subscriptions on their own, or even move them into another organisations Azure Active directory tenant.</p>
+<p>Craft your role definition to you liking and then you can push it to Azure, either by using the Azure portal, ARM Api, Cli or PowerShell.
+Here is a <a href="customowner.bicep">Custom Owner</a> role to give you a <strong>Bicep</strong> example to start from. Basically what you see in this file is the same properties that you saw when listing a role definition with PowerShell, with the difference that the Id is not yet determined. If you need some inspiration for permissions, view a role in the Azure portal and check the permissions tab, here you can search actions and dataactions.</p>
+<h2 id="deploy-the-bicep-role-definition">Deploy the bicep role definition</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$Parameters = @{roleName = <span style="color:#e6db74">&#34;Custom Owner&#34;</span>}
+Set-AzContext -SubscriptionName <span style="color:#e6db74">&#39;Your Subscription displayname&#39;</span>
+
+New-AzSubscriptionDeployment -TemplateParameterObject $Parameters -TemplateFile <span style="color:#e6db74">&#39;customowner.bicep&#39;</span> -Location <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+</code></pre></div><p>I recommend deploying role definitions to Scopes high up in your structure, preferably to management groups. The role definitions can then be assigned in any subordinate scopes.</p>
+<p>To deploy the same role defintion to a managmentgroup you must change the <strong>targetScope</strong> to &lsquo;managementGroup&rsquo;, replace <em>subscription().id</em> with <em>managementGroup().id</em> in both <strong>roleDefName</strong> declaration and <strong>assignableScopes</strong>.<a href="customownerMgmtGroup.bicep">Like This!</a> Then you run the following PowerShell:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">$Parameters = @{roleName = <span style="color:#e6db74">&#34;Custom Owner&#34;</span>}
+
+New-AzManagementGroupDeployment -TemplateParameterObject $Parameters -TemplateFile <span style="color:#e6db74">&#39;customownerMgmtGroup.bicep&#39;</span> -ManagementGroupId <span style="color:#e6db74">&#39;Corp&#39;</span> -Location <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+</code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>This was how you can define and assign roles in Azure. By using code you can automate the assignments and in a later blogpost I will also cover how you can use Azure Blueprints to make the role assignments as part of your landing zone deployments. These techniques can be another piece of the puzzle to automate your subscription deployment process.</p>
+<p><strong>Please follow me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedIn</a> and let me know if you like my blog.</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>Deploying Azure Subscriptions, as Code</title>

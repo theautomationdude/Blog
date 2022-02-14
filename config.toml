@@ -41,6 +41,7 @@ publishDir = "docs"
     [languages.en.params.logo]
       logoText = "https://theautomationdude.github.io/blog"
       logoHomeLink = "https://theautomationdude.github.io/blog"
+
     # or
     #
     # path = "/img/your-example-logo.svg"
@@ -49,7 +50,7 @@ publishDir = "docs"
   # And you can even create generic menu
   [[menu.main]]
     identifier = "blog"
-    name       = "Blog"
+    name       = "Posts"
     url        = "posts"
   [[menu.main]]
     identifier = "about"
