@@ -41,7 +41,7 @@ If you want to try this out yourself as a lab, you must first ensure that you ha
 |Azure Bicep Cli | [Bicep Cli install instructions](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)|
 |VSCode + Bicep Extension | [Getting Up And Ready With VSCode](/blog/posts/gettingupandreadywithvscode/) and [VSCode Productivity hints](/blog/posts/vscodeproductivity/)|
 |Azure Powershell | [Setup Azure Powershell ](/blog/posts/setupazpowershell/)|
-|Azure Account | [Register Free Azure Account ](/blog/posts/RegisterFreeAzureAccount/)|
+|Azure Account | [Register Free Azure Account ](/blog/posts/registerfreeazureaccount/)|
 |User account with sufficient privileges to create Management Groups in the Tenant Root group | [Register Free Azure Account](/blog/posts/registerfreeazureaccount/) (*See the "Enable Management Groups" section*)|
 |Management Groups (optional, you can create management groups manually if you want to) | [Deploy ManagementGroups As Code ](/blog/posts/managementgroups/)|
 
@@ -185,7 +185,7 @@ Connect-AzAccount
 
 Now you can go ahead with deployment. 
 
- Note that I have chosen to deploy my subscriptions to the managementgroup 'Corp' that was created in the last [blogpost](/blog/posts/ManagementGroups/). In *Location* you can use your Azure location of preference.
+ Note that I have chosen to deploy my subscriptions to the managementgroup 'Corp' that was created in the last [blogpost](/blog/posts/managementgroups/). In *Location* you can use your Azure location of preference.
 
 ```PowerShell
 #Splatting parameters to make it more readable

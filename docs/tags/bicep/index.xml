@@ -7,7 +7,16 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-    <lastBuildDate>Sat, 12 Feb 2022 10:10:45 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 15:24:45 +0100</lastBuildDate><atom:link href="https://theautomationdude.github.io/blog/tags/bicep/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Azure Policies, the basics</title>
+      <link>https://theautomationdude.github.io/blog/posts/azurepolicybasics/</link>
+      <pubDate>Sat, 26 Mar 2022 15:24:45 +0100</pubDate>
+      
+      <guid>https://theautomationdude.github.io/blog/posts/azurepolicybasics/</guid>
+      <description>When an organization decides to provision applications and infrastructure components in the cloud, security has to be taken into consideration. To mitigate human security mistakes it can be wise to put some guardrails around your cloud environments. The amounts of guardrails chosen depends on organisation size, developer experience level and security posture, as well as network topologies and possible connections to the on-premise company systems. In Azure, the Azure policies allow you to reduce the risk of having your environment being compromised by human error and risky configurations, either unintended or with malicious intent.</description>
+    </item>
+    
     <item>
       <title>Azure Roles</title>
       <link>https://theautomationdude.github.io/blog/posts/azureroles/</link>

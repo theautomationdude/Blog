@@ -189,7 +189,7 @@
 </tr>
 <tr>
 <td>Azure Account</td>
-<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account </a></td>
 </tr>
 <tr>
 <td>User account with sufficient privileges to create Management Groups in the Tenant Root group</td>
@@ -283,7 +283,7 @@ $Subscriptions += @{
 <p>First, if your PowerShell session connection to Azure has expired, you may need to re-authenticate.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
 </code></pre></div><p>Now you can go ahead with deployment.</p>
-<p>Note that I have chosen to deploy my subscriptions to the managementgroup &lsquo;Corp&rsquo; that was created in the last <a href="/blog/posts/ManagementGroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
+<p>Note that I have chosen to deploy my subscriptions to the managementgroup &lsquo;Corp&rsquo; that was created in the last <a href="/blog/posts/managementgroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
 $Params = @{
     ManagementGroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>

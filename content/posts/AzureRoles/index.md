@@ -29,7 +29,7 @@ In Azure, access and control of any resources is managed through *Role based acc
 |Azure Bicep Cli | [Bicep Cli install instructions](https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install)|
 |VSCode + Bicep Extension | [Getting Up And Ready With VSCode](/blog/posts/gettingupandreadywithvscode/) and [VSCode Productivity hints](/blog/posts/vscodeproductivity/)|
 |Azure Powershell | [Setup Azure Powershell ](/blog/posts/setupazpowershell/)|
-|Azure Account | [Register Free Azure Account ](/blog/posts/RegisterFreeAzureAccount/)|
+|Azure Account | [Register Free Azure Account ](/blog/posts/registerfreeazureaccount/)|
 
 # Scopes
 The roles will be given permissions on a *Scope*. To determine what a user is authorized to do in a specific scope, Azure checks what roles assignments are made to the scope you are trying to access. 

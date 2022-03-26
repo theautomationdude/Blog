@@ -6,8 +6,156 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Sat, 12 Feb 2022 10:10:45 +0100</lastBuildDate>
+        <lastBuildDate>Sat, 26 Mar 2022 15:24:45 +0100</lastBuildDate>
         <atom:link href="https://theautomationdude.github.io/blog/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Azure Policies, the basics</title>
+            <link>https://theautomationdude.github.io/blog/posts/azurepolicybasics/</link>
+            <pubDate>Sat, 26 Mar 2022 15:24:45 +0100</pubDate>
+            
+            <guid>https://theautomationdude.github.io/blog/posts/azurepolicybasics/</guid>
+            <description>When an organization decides to provision applications and infrastructure components in the cloud, security has to be taken into consideration. To mitigate human security mistakes it can be wise to put some guardrails around your cloud environments. The amounts of guardrails chosen depends on organisation size, developer experience level and security posture, as well as network topologies and possible connections to the on-premise company systems. In Azure, the Azure policies allow you to reduce the risk of having your environment being compromised by human error and risky configurations, either unintended or with malicious intent.</description>
+            <content type="html"><![CDATA[<p><img src="policy.png" alt="policy.png"></p>
+<p>When an organization decides to provision applications and infrastructure components in the cloud, security has to be taken into consideration. To mitigate human security mistakes it can be wise to put some guardrails around your cloud environments. The amounts of guardrails chosen depends on organisation size, developer experience level and security posture, as well as network topologies and possible connections to the on-premise company systems. In Azure, the Azure policies allow you to reduce the risk of having your environment being compromised by human error and risky configurations, either unintended or with malicious intent.</p>
+<p>Azure policies can audit, deny, append and modify resource configurations that introduce unnecessary risk. You can also deploy complementary resources with a certain configuration where missing, for example you can automatically deploy a network security group for every created subnet, if your application teams have failed to do so.</p>
+<p>The use of policies can be powerful, but also hampers your developers freedom. You should always weigh the ease of working, against the security gained when you assign a policy. There is no &ldquo;golden path&rdquo; for every single case here, you will have to adapt your security governance to the organisations needs and security posture. When you define and assign the policies, think about what the desired outcome is and how you can achieve that outcome with a minimum of hassle for your application teams.</p>
+<h5 id="this-guide-depends-on-the-following">This guide depends on the following:</h5>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Azure Bicep Cli</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/azure-resource-manager/bicep/install">Bicep Cli install instructions</a></td>
+</tr>
+<tr>
+<td>VSCode + Bicep Extension</td>
+<td><a href="/blog/posts/gettingupandreadywithvscode/">Getting Up And Ready With VSCode</a> and <a href="/blog/posts/vscodeproductivity/">VSCode Productivity hints</a></td>
+</tr>
+<tr>
+<td>Azure Powershell</td>
+<td><a href="/blog/posts/setupazpowershell/">Setup Azure Powershell </a></td>
+</tr>
+<tr>
+<td>Azure Account</td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account </a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="policy-definitions">Policy Definitions</h2>
+<p>First and foremost, all Azure policies are defined by Policy Definitions. A Policy Definition describes the conditions for when the policy will apply, how the policy is enforced and what parameters that can be supplied to the policy. Microsoft has provided a large variety of <em>built-in</em> policies, that you can assign without having to author your own <em>Custom</em> policy. You can find all these in the Azure Portal Policy blade by clicking <em>definitions</em>. The <em>type</em> column shows if the policy is built-in or custom made. I usually just type <em>policy</em> in the main search bar of the Azure portal to bring up the policy blade. However you can open the policy blade from management groups, subscriptions and resource groups, as these are the <em>scopes</em> where you can store policy definitions and make policy assignments.</p>
+<h2 id="policy-initiatives--sets">Policy Initiatives / Sets</h2>
+<p>You can group policy definitions into something called <em>initiatives</em> or* policy sets* . This will enable you to assign a group of policies to a scope with a single assignment and helps grouping policies that server a common purpose.</p>
+<h2 id="policy-assignments">Policy Assignments</h2>
+<p>The Policy Assignments is what links the Policy Definitions or Initiatives/PolicySets to an Azure Scope, such as a Management Group, Subscription or Resource Group. When assigning the policy, parameters can be provided. This will make it possible to make multiple assignments of a policy in the same scope, with different paramter values set in each, and also make it possible to use a policy definition for assignments in several different subordinate scopes.</p>
+<h1 id="assigning-policies">Assigning Policies</h1>
+<p>To assign a policy you can either use the Azure Portal, use PowerShell or make a Bicep/ARM deployment of a policyassignment. I won&rsquo;t show how to do it in the portal as I think it&rsquo;s rather self explanatory if you open the policy blade.</p>
+<p>Let&rsquo;s assign a simple tag policy to the <em>SAP</em> Management group scope.</p>
+<h2 id="find-the-policy-in-the-azure-portal">Find the policy in the Azure portal</h2>
+<p>Open up Managment Groups in the portal and then click the <em>Policy</em> in the left side menu. Then open <em>definitions</em> and search the policies for the keyword <em>Tag</em>, select the policy <em>Require a tag and its value on resources</em>. Copy the definition id in order to use it in your assignment.</p>
+<h2 id="powershell">PowerShell</h2>
+<p>Here is how you make a policyassignment using PowerShell.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
+
+$ManangementGroup = Get-AzManagementGroup <span style="color:#e6db74">&#39;SAP&#39;</span>
+
+$ManangementGroup.Id
+<span style="color:#75715e"># Outputs /providers/Microsoft.Management/managementGroups/SAP</span>
+<span style="color:#75715e"># This is the Scope you will assign the policy to</span>
+
+
+<span style="color:#75715e"># Here you will use the Id you copied from the policydefinition in the Azure Portal</span>
+$PolicyDefinition = Get-AzPolicyDefinition -Id <span style="color:#e6db74">&#39;/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62&#39;</span>
+
+<span style="color:#75715e">#Splatting the parameters for New-AzPolicyAssignment</span>
+$Params = @{
+    Name = <span style="color:#e6db74">&#39;TagCostCenter0000&#39;</span>
+    DisplayName = <span style="color:#e6db74">&#39;All resources must have tag CostCenter set to 0000&#39;</span>
+    PolicyDefinition = $PolicyDefinition
+    Scope = $ManangementGroup.Id
+    TagName = <span style="color:#e6db74">&#39;CostCenter&#39;</span>
+    TagValue = <span style="color:#e6db74">&#39;0000&#39;</span>
+}
+
+New-AzPolicyAssignment @Params
+</code></pre></div><h3 id="cleaning-up">Cleaning up</h3>
+<p>If you want to remove the policy assignment at a later time, you can use PowerShell again in a similar way.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
+
+$ManangementGroup = Get-AzManagementGroup <span style="color:#e6db74">&#39;SAP&#39;</span>
+
+$ManangementGroup.Id
+<span style="color:#75715e"># Outputs /providers/Microsoft.Management/managementGroups/SAP</span>
+<span style="color:#75715e"># This is the Scope you will unassign the policy from</span>
+
+<span style="color:#75715e"># Removes the policy assignment</span>
+Remove-AzPolicyAssignment -Name <span style="color:#e6db74">&#39;TagCostCenter0000&#39;</span> -Scope $ManangementGroup.Id
+</code></pre></div><h2 id="bicep">Bicep</h2>
+<p>I like to deploy policyassignments using Bicep, as it provides a way to store all the details of the assignments in a nice readable format and you can easily version control the Bicep files. Another reason I like to deploy using template deployments (Bicep or ARM) is that if you would use Azure Cli or PowerShell cmdlets and loops to deploy each resource, it would call the Azure ARM Api once for every resource instead of just calling the Api once to deliver the deployment template.</p>
+<p>With Bicep you can also bundle other resources together with the policy assignment and deploy to the same scope, as a nice package. Once a deployment has been submitted to Azure, the deployment will be carried out by Azure Resource manager independently of your PowerShell session. You&rsquo;ll notice that this is way more efficient when deploying lot&rsquo;s of resources in a single deployment. I prefer to use Bicep rather than ARM when suitable, because of the simplified syntax and the VSCode intellisense support for Bicep.</p>
+<h3 id="create-the-bicep-file">Create the Bicep file</h3>
+<p>Download the Bicep file <a href="assign_costcentertagpolicy.bicep">assign_costcentertagpolicy.bicep</a>. It&rsquo;s a good idea to write your own bicep file and use the downloaded as reference, just to learn the syntax and the logic of the bicep files. Remember that <code>Ctrl+Space</code> will give you intellisense syntax help.</p>
+<h5 id="targetscope">targetScope</h5>
+<p>We are deploying this template to a managementGroup, the targetScope must match the scope we deploy to.</p>
+<h5 id="decorator">@<em>decorator</em></h5>
+<p>The decorators for the tagName and tagValue parameters, these decorators provides descriptions for the parameters. There are other decorators available like &ldquo;allowed(values)&rdquo;, you can see what&rsquo;s available if you just type the <em>@</em> sign in the row above the parameter declaration, VSCode will bring up the Bicep intellisense.</p>
+<h5 id="param-tagname-string">param tagName string</h5>
+<p>This is a parameter, we will set the tagName defaultvalue to &lsquo;CostCenter&rsquo;.</p>
+<h5 id="param-tagvalue-array">param tagValue array</h5>
+<p>This is a parameter, we will set the tagName defaultvalue to &lsquo;0000&rsquo;.</p>
+<h5 id="resouce-assign_costcentertagpolicy">resouce assign_costcentertagpolicy</h5>
+<p>This is the policy assignment resource.</p>
+<h5 id="name">name:</h5>
+<p>The name of the policy assignment, will be used in the resourceId for the policy assignment.</p>
+<h5 id="-">/* */</h5>
+<p>Remarked section (starting with /* and ending with */), this is just to show how to make the assignment for a remediation policy, remediation tasks require an indentity that will carry out the remediations.</p>
+<h5 id="properties">properties</h5>
+<p>The properties of this policy assignment.</p>
+<h5 id="displayname">displayName</h5>
+<p>The name of the policy assignment that will be displayed in the Azure portal.</p>
+<h5 id="description">description</h5>
+<p>The description of the policy assignment that will be displayed in the Azure portal.</p>
+<h5 id="policydefinitionid">policyDefinitionId</h5>
+<p>The id of the policy definition that will be assigned.</p>
+<h5 id="parameters">parameters</h5>
+<p>In this key all the input parameters for the policy definition will be populated.</p>
+<h5 id="tagname">tagName</h5>
+<p>The first parameter that will be consumed by the policy definition, this value is consumed from the tagName parameter declared earlier in the bicep, using the defaultvalue &lsquo;CostCenter&rsquo; if nothing else is provided when deploying.</p>
+<h5 id="tagvalue">tagValue</h5>
+<p>The second parameter that will be consumed by the policy definition, this value is consumed from the tagValue parameter declared earlier in the bicep, using the defaultvalue &lsquo;0000&rsquo; if nothing else is provided when deploying.</p>
+<h3 id="deploy-the-policy-assignment">Deploy the policy assignment</h3>
+<p>First you always need to authenticate your session to Azure, if have done so, but your session to Azure has expired, you may need to re-authenticate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
+</code></pre></div><p>Now you can go ahead with deployment.</p>
+<p>Note that I have chosen to deploy my policy assignment to the managementgroup &lsquo;SAP&rsquo; that was created in a previous <a href="/blog/posts/managementgroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
+$Params = @{
+    ManagementGroupId = <span style="color:#e6db74">&#39;SAP&#39;</span>
+    Templatefile = <span style="color:#e6db74">&#39;.\assign_costcentertagpolicy.bicep&#39;</span>
+    Location = <span style="color:#e6db74">&#39;WestEurope&#39;</span>
+    Name = <span style="color:#e6db74">&#39;PolicyAssigndeploy&#39;</span>
+}
+
+<span style="color:#75715e">#Deploy the Assignment</span>
+New-AzManagementGroupDeployment @Params
+</code></pre></div><h3 id="cleaning-up-1">Cleaning up</h3>
+<p>If you want to remove the policy assignment at a later time, can clean up both the assignment and the deployment details.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e"># Removes the policy assignment</span>
+$ManangementGroup = Get-AzManagementGroup <span style="color:#e6db74">&#39;SAP&#39;</span>
+Remove-AzPolicyAssignment -Name <span style="color:#e6db74">&#39;TagCostCenter0000&#39;</span> -Scope $ManangementGroup.Id
+
+<span style="color:#75715e"># This line removes the deployment, but does not remove the assignment itself</span>
+Remove-AzManagementGroupDeployment -ManagementGroupId <span style="color:#e6db74">&#39;SAP&#39;</span> -Name <span style="color:#e6db74">&#39;PolicyAssigndeploy&#39;</span>
+</code></pre></div><h1 id="conclusion">Conclusion</h1>
+<p>This was two ways to assign policies using code, using Azure Cli is very similar to using PowerShell, but there are also other ways to do this using code, but I won&rsquo;t be covering other ways here. Next we will look into how to make Policy Initiatives / Policy Sets and how to author your own Custom Policies - stay tuned!</p>
+<p><strong>Please follow me on <a href="https://www.linkedin.com/in/peter-the-automator/">LinkedIn</a> and let me know if you like my blog.</strong></p>
+]]></content>
+        </item>
         
         <item>
             <title>Azure Roles</title>
@@ -42,7 +190,7 @@ This guide depends on the following:    Tool Link     Azure Bicep Cli Bicep Cli 
 </tr>
 <tr>
 <td>Azure Account</td>
-<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account </a></td>
 </tr>
 </tbody>
 </table>
@@ -180,7 +328,7 @@ New-AzManagementGroupDeployment -TemplateParameterObject $Parameters -TemplateFi
 </tr>
 <tr>
 <td>Azure Account</td>
-<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account </a></td>
 </tr>
 <tr>
 <td>User account with sufficient privileges to create Management Groups in the Tenant Root group</td>
@@ -274,7 +422,7 @@ $Subscriptions += @{
 <p>First, if your PowerShell session connection to Azure has expired, you may need to re-authenticate.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell">Connect-AzAccount
 </code></pre></div><p>Now you can go ahead with deployment.</p>
-<p>Note that I have chosen to deploy my subscriptions to the managementgroup &lsquo;Corp&rsquo; that was created in the last <a href="/blog/posts/ManagementGroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
+<p>Note that I have chosen to deploy my subscriptions to the managementgroup &lsquo;Corp&rsquo; that was created in the last <a href="/blog/posts/managementgroups/">blogpost</a>. In <em>Location</em> you can use your Azure location of preference.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-PowerShell" data-lang="PowerShell"><span style="color:#75715e">#Splatting parameters to make it more readable</span>
 $Params = @{
     ManagementGroupId = <span style="color:#e6db74">&#39;Corp&#39;</span>
@@ -325,7 +473,7 @@ If you want to try this out yourself as a lab, you must first ensure that you ha
 </tr>
 <tr>
 <td>Azure Account</td>
-<td><a href="/blog/posts/RegisterFreeAzureAccount/">Register Free Azure Account </a></td>
+<td><a href="/blog/posts/registerfreeazureaccount/">Register Free Azure Account </a></td>
 </tr>
 <tr>
 <td>User account with sufficient privileges to create Management Groups in the Tenant Root group</td>
